@@ -542,11 +542,11 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
 */
 struct Phone
 {
-    // 1) memory amount (int)
-    // 2) number of CPU cores (char)
-    // 3) screen size (float)
-    // 4) camera resolution (float)
-    // 5) thickness (float)
+    int memoryAmount = 128;
+    char numberOfCPUCores = 4;
+    float screenSize = 5.8f;
+    float cameraResolution = 20.5f;
+    float thickness = 0.75f;
 
     // 1) recieve calls
     // 2) capture photos
@@ -567,11 +567,11 @@ struct Phone
 */
 struct AirConditioner
 {
-    // 1) price (float)
-    // 2) screen width (int)
-    // 3) remote distance (short)
-    // 4) temperature range (float)
-    // 5) power (short)
+    float price = 1.95f;
+    int screenWidth = 10;
+    short remoteDistance = 20;
+    float temperatureRange = 55.6f;
+    short power = 24;
 
     // 1) turn off automatically
     // 2) start cooling
@@ -592,11 +592,11 @@ struct AirConditioner
 */
 struct Headphones
 {
-    // 1) impedance (int)
-    // 2) spectrum distribution (float)
-    // 3) wire length (char)
-    // 4) closed or not (bool)
-    // 5) manufacturer (std::string)
+    int impedance = 250;
+    float spectrumDistribution = 3.3f;
+    char wireLength = 3;
+    bool isClosed = false;
+    std::string manufacturer = " ";
 
     // 1) play sound
     // 2) change earcup position
@@ -617,11 +617,11 @@ struct Headphones
 */
 struct WashingMachine
 {
-    // 1) volume (float)
-    // 2) rpm (float)
-    // 3) power supply voltage (int)
-    // 4) noise level (float)
-    // 5) brand (std::string)
+    float volume = 6.0f;
+    float rpm = 75.0f;
+    int powerSupplyVoltage = 220;
+    float noiseLevel = 50.0f;
+    std::string brand = " ";
         
     // 1) change water
     // 2) wash clothes
@@ -638,11 +638,11 @@ struct WashingMachine
 */
 struct EnvelopSection
 {
-    // 1) attack time (float)
-    // 2) hold time (float)
-    // 3) decay amount (float)
-    // 4) sustain amount (float)
-    // 5) release time (float)
+    float attackTime = 0.1f;
+    float holdTime = 0.1f;
+    float decayMagnitude = 0.75f;
+    float sustainMagnitude = 0.25f;
+    float releaseTime = 0.5f;
 };
 /*
 6) Oscillator section:
@@ -655,11 +655,11 @@ struct EnvelopSection
 */
 struct OscillatorSection
 {
-    // 1) waveform index (char)
-    // 2) unison spread (float)
-    // 3) level (float)
-    // 4) pan (float)
-    // 5) amount of voices (short)
+    char waveformIndex = 0;
+    float unisonSpread = 0.5f;
+    float level = 0.67f;
+    float pan = 0.0f;
+    short amountOfVoices = 1;
 };
 /*
 7) Filter section:
@@ -672,11 +672,11 @@ struct OscillatorSection
 */
 struct FilterSection
 {
-    // 1) cut frequency (float)
-    // 2) quality factor (float)
-    // 3) gain (float)
-    // 4) mix (float)
-    // 5) comb pattern index (char)
+    float cutFrequency = 15000.0f;
+    float qualityFactor = 1.0f;
+    float gain = 0.0f;
+    float mix = 1.0f;
+    char combPatternIndex = 0;
 };
 /*
 8) FX section:
@@ -689,11 +689,11 @@ struct FilterSection
 */
 struct FXSection
 {
-    // 1) distortion amount (float)
-    // 2) delay time (float)
-    // 3) reverb time (float)
-    // 4) compression ratio (float)
-    // 5) FX mix (float)
+    float distortionAmount = 0.5f;
+    float delayTime = 0.25f;
+    float reverbTime = 0.5f;
+    float compressionRatio = 4.0f;
+    float mix = 1.0f;
 };
 /*
 9) LFO section:
@@ -706,11 +706,11 @@ struct FXSection
 */
 struct LFOSection
 {
-    // 1) amount of envelop points (char)
-    // 2) curve form (char)
-    // 3) grid snapping (bool)
-    // 4) stereo spreader (int)
-    // 5) trigger mode index (char)
+    char amountOfEnvelopPoints = 3;
+    char curveFormIndex = 1;
+    bool gridSnapping = false;
+    int stereoSpreader = 100;
+    char triggerModeIndex = 1;
 };
 /*
 10) Synth Application
@@ -727,11 +727,11 @@ struct LFOSection
 */
 struct SynthApplication
 {
-    // 1) Envelope section (Envelop)
-    // 2) Oscillator section (Oscillator)
-    // 3) Filter section (Filter)
-    // 4) FX section (FX)
-    // 5) LFO section (LFO)
+    EnvelopSection envelope;
+    OscillatorSection oscillator;
+    FilterSection filter;
+    FXSection FX1;
+    LFOSection LFO1;
 
     // 1) apply filtration
     // 2) modulate one oscillator with another
