@@ -376,17 +376,17 @@ Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will
 be their own UDTs you'll define these 5 sub-objects in Part 1d.
 
-Thing 10) Application
+Thing 10) Synth Application
 5 properties:
-    1) Button
-    2) Slider
-    3) Meter
-    4) Label
-    5) ComboBox
+    1) Envelope section
+    2) Oscillator section
+    3) Filter section
+    4) FX section
+    5) LFO section
 3 things it can do:
-    1) toggle measurement
-    2) increase output level
-    3) choose preset
+    1) apply filtration
+    2) modulate one oscillator with another
+    3) toggle FX element
  */
 
 /*
@@ -476,65 +476,65 @@ example:
 object in plain English. Remember to pick properties that can be represented
 with 'int float double bool char std::string'.
 
-Thing 5)
+Thing 5) Envelop section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) attack time
+    2) hold time
+    3) decay amount
+    4) sustain amount
+    5) release time
 3 things it can do:
-    1)
-    2)
-    3)
+    1) hold the signal level with sustain
+    2) increase signal level over attack time
+    3) decrease signal level over release time
 
-Thing 6)
+Thing 6) Oscillator section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) waveform
+    2) unison spread
+    3) level
+    4) pan
+    5) amount of voices
 3 things it can do:
-    1)
-    2)
-    3)
+    1) produce the signal
+    2) pass signal as modulating
+    3) move over wavetable
 
-Thing 7)
+Thing 7) Filter section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) cut frequency
+    2) Quality factor
+    3) Gain
+    4) Mix
+    5) comb pattern
 3 things it can do:
-    1)
-    2)
-    3)
+    1) transform input signal
+    2) transform comb pattern
+    3) move cut frequency
 
-Thing 8)
+Thing 8) FX section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Distortion
+    2) Delay
+    3) Reverb
+    4) Compressor
+    5) Flanger
 3 things it can do:
-    1)
-    2)
-    3)
+    1) apply soft clipping
+    2) copy signal for delay
+    3) suppress input signal with ratio
 
-Thing 9)
+Thing 9) LFO section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) amount of envelop points
+    2) curve form
+    3) grid snapping
+    4) stereo spreader
+    5) trigger mode
 3 things it can do:
-    1)
-    2)
-    3)
+    1) initiate envelop on key release
+    2) modulate following speed
+    3) change curve concave factor
  */
 
 /*
