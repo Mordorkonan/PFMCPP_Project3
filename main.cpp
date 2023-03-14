@@ -490,7 +490,7 @@ Thing 5) Envelop section
 
 Thing 6) Oscillator section
 5 properties:
-    1) waveform
+    1) waveform index
     2) unison spread
     3) level
     4) pan
@@ -503,10 +503,10 @@ Thing 6) Oscillator section
 Thing 7) Filter section
 5 properties:
     1) cut frequency
-    2) Quality factor
-    3) Gain
-    4) Mix
-    5) comb pattern
+    2) quality factor
+    3) gain
+    4) mix
+    5) comb pattern index
 3 things it can do:
     1) transform input signal
     2) transform comb pattern
@@ -514,11 +514,11 @@ Thing 7) Filter section
 
 Thing 8) FX section
 5 properties:
-    1) Distortion
-    2) Delay
-    3) Reverb
-    4) Compressor
-    5) Flanger
+    1) distortion amount
+    2) delay time
+    3) reverb time
+    4) compression ratio
+    5) FX mix
 3 things it can do:
     1) apply soft clipping
     2) copy signal for delay
@@ -530,7 +530,7 @@ Thing 9) LFO section
     2) curve form
     3) grid snapping
     4) stereo spreader
-    5) trigger mode
+    5) trigger mode index
 3 things it can do:
     1) initiate envelop on key release
     2) modulate following speed
@@ -562,6 +562,41 @@ example:
         Brightness (double)
         width in cm (int)
         height in cm (int)
+
+    Envelop section:
+        1) attack time (float)
+        2) hold time (float)
+        3) decay amount (float)
+        4) sustain amount (float)
+        5) release time (float)
+
+    Oscillator section
+        1) waveform index (char)
+        2) unison spread (float)
+        3) level (float)
+        4) pan (float)
+        5) amount of voices (short)
+
+    Filter section
+        1) cut frequency (float)
+        2) quality factor (float)
+        3) gain (float)
+        4) mix (float)
+        5) comb pattern index (char)
+
+    FX section
+        1) distortion amount (float)
+        2) delay time (float)
+        3) reverb time (float)
+        4) compression ratio (float)
+        5) FX mix (float)
+
+    LFO section
+        1) amount of envelop points (char)
+        2) curve form (char)
+        3) grid snapping (bool)
+        4) stereo spreader (int)
+        5) trigger mode index (char)
 */
 
 /*
