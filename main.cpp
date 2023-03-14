@@ -329,6 +329,34 @@ example:
         Brightness (double)
         area in cm2 (int)
         brand (std::string)
+
+    Phone:
+        memory amount (int)
+        number of CPU cores (char)
+        screen size (float)
+        camera resolution (float)
+        thickness (float)
+
+    Air conditioner:
+        price (float)
+        screen width (int)
+        remote distance (short)
+        temperature range (float)
+        power (short)
+
+    Headphones:
+        1) impedance (int)
+        2) spectrum distribution (float)
+        3) wire length (short)
+        4) closed or not (bool)
+        5) manufacturer (str::string)
+
+    Washing machine:
+        1) volume (float)
+        2) rpm (float)
+        3) power supply voltage (int)
+        4) noise level (float)
+        5) brand (std::string)
 */
 
 /*
