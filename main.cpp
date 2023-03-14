@@ -203,54 +203,6 @@ Part 1b - Step 2: Assignment
         primitives.
         c) pick properties that can eventually be represented with
         'int float double bool char std::string'.
-
-Thing 1) Phone
-5 properties:
-    1) memory amount
-    2) number of CPU cores
-    3) screen size
-    4) camera resolution
-    5) thickness
-3 things it can do:
-    1) recieve calls
-    2) capture photos
-    3) show messages
-
-Thing 2) Air conditioner
-5 properties:
-    1) price
-    2) screen width
-    3) remote distance
-    4) temperature range
-    5) power
-3 things it can do:
-    1) turn off automatically
-    2) start cooling
-    3) decrease humidity
-
-Thing 3) headphones
-5 properties:
-    1) impedance
-    2) spectrum distribution
-    3) wire length
-    4) closed or not
-    5) manufacturer
-3 things it can do:
-    1) play sound
-    2) change earcup position
-    3) imitate surround
-
-Thing 4) Washing machine
-5 properties:
-    1) volume
-    2) rpm
-    3) power supply voltage
-    4) noise level
-    5) brand
-3 things it can do:
-    1) change water
-    2) wash clothes
-    3) change washing mode automatically
 */
 
 /*
@@ -375,18 +327,6 @@ Part 1c - Step 4: Assignment
 Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will
 be their own UDTs you'll define these 5 sub-objects in Part 1d.
-
-Thing 10) Synth Application
-5 properties:
-    1) Envelope section
-    2) Oscillator section
-    3) Filter section
-    4) FX section
-    5) LFO section
-3 things it can do:
-    1) apply filtration
-    2) modulate one oscillator with another
-    3) toggle FX element
  */
 
 /*
@@ -562,41 +502,6 @@ example:
         Brightness (double)
         width in cm (int)
         height in cm (int)
-
-    Envelop section:
-        1) attack time (float)
-        2) hold time (float)
-        3) decay amount (float)
-        4) sustain amount (float)
-        5) release time (float)
-
-    Oscillator section
-        1) waveform index (char)
-        2) unison spread (float)
-        3) level (float)
-        4) pan (float)
-        5) amount of voices (short)
-
-    Filter section
-        1) cut frequency (float)
-        2) quality factor (float)
-        3) gain (float)
-        4) mix (float)
-        5) comb pattern index (char)
-
-    FX section
-        1) distortion amount (float)
-        2) delay time (float)
-        3) reverb time (float)
-        4) compression ratio (float)
-        5) FX mix (float)
-
-    LFO section
-        1) amount of envelop points (char)
-        2) curve form (char)
-        3) grid snapping (bool)
-        4) stereo spreader (int)
-        5) trigger mode index (char)
 */
 
 /*
@@ -622,6 +527,106 @@ MOVE THEM to the space below this block comment and put them in numerical order
     I do not want to see 2 copies of your Plain-English UDTs.
     I only want to see the 10 UDTs written BELOW this block comment, in
 numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
+
+1) Phone
+5 properties:
+    1) memory amount (int)
+    2) number of CPU cores (char)
+    3) screen size (float)
+    4) camera resolution (float)
+    5) thickness (float)
+3 things it can do:
+    1) recieve calls
+    2) capture photos
+    3) show messages
+
+2) Air conditioner
+5 properties:
+    1) price (float)
+    2) screen width (int)
+    3) remote distance (short)
+    4) temperature range (float)
+    5) power (short)
+3 things it can do:
+    1) turn off automatically
+    2) start cooling
+    3) decrease humidity
+
+3) headphones
+5 properties:
+    1) impedance (int)
+    2) spectrum distribution (float)
+    3) wire length (char)
+    4) closed or not (bool)
+    5) manufacturer (std::string)
+3 things it can do:
+    1) play sound
+    2) change earcup position
+    3) imitate surround
+
+4) Washing machine
+5 properties:
+    1) volume (float)
+    2) rpm (float)
+    3) power supply voltage (int)
+    4) noise level (float)
+    5) brand (std::string)
+3 things it can do:
+    1) change water
+    2) wash clothes
+    3) change washing mode automatically
+
+5) Envelop section:
+5 properties:
+    1) attack time (float)
+    2) hold time (float)
+    3) decay amount (float)
+    4) sustain amount (float)
+    5) release time (float)
+
+6) Oscillator section:
+5 properties:
+    1) waveform index (char)
+    2) unison spread (float)
+    3) level (float)
+    4) pan (float)
+    5) amount of voices (short)
+
+7) Filter section:
+5 properties:
+    1) cut frequency (float)
+    2) quality factor (float)
+    3) gain (float)
+    4) mix (float)
+    5) comb pattern index (char)
+
+8) FX section:
+5 properties:
+    1) distortion amount (float)
+    2) delay time (float)
+    3) reverb time (float)
+    4) compression ratio (float)
+    5) FX mix (float)
+
+9) LFO section:
+5 properties:
+    1) amount of envelop points (char)
+    2) curve form (char)
+    3) grid snapping (bool)
+    4) stereo spreader (int)
+    5) trigger mode index (char)
+
+10) Synth Application
+5 properties:
+    1) Envelope section (Envelop)
+    2) Oscillator section (Oscillator)
+    3) Filter section (Filter)
+    4) FX section (FX)
+    5) LFO section (LFO)
+3 things it can do:
+    1) apply filtration
+    2) modulate one oscillator with another
+    3) toggle FX element
 */
 
 /*
