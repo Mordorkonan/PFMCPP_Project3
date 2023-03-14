@@ -540,18 +540,7 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     2) capture photos
     3) show messages
 */
-struct Phone
-{
-    int memoryAmount = 128;
-    char numberOfCPUCores = 4;
-    float screenSize = 5.8f;
-    float cameraResolution = 20.5f;
-    float thickness = 0.75f;
 
-    void recieveCalls(int number);
-    void capturePhoto(bool frontCamera = false);
-    std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
-};
 /*
 2) Air conditioner
 5 properties:
@@ -565,18 +554,7 @@ struct Phone
     2) start cooling
     3) decrease humidity
 */
-struct AirConditioner
-{
-    float price = 1.95f;
-    int screenWidth = 10;
-    short remoteDistance = 20;
-    float temperatureRange = 55.6f;
-    short power = 24;
 
-    bool turnOffAutomatically(char timer); // returns True on success
-    void startCooling(float targetTemperature, char timer = 0);
-    void decreaseHumidity(short targetRelativeHumidity);
-};
 /*
 3) headphones
 5 properties:
@@ -590,35 +568,7 @@ struct AirConditioner
     2) change earcup position
     3) imitate surround
 */
-struct Headphones
-{
-    struct Microphone
-    {
-        float inputGain = 0.25f;
-        bool flexibleConstruction = false;
-        bool EnablementState = true;
 
-        void setState(bool state);
-        bool getState(bool toggleStateOnRequest = false);
-        float trackInputLevel(bool useGainToDecibelsTransformation = false, bool strobeLedOnClipping = false);
-    };
-
-    int impedance = 250;
-    float spectrumDistribution = 3.3f;
-    char wireLength = 3;
-    bool isClosed = false;
-    std::string manufacturer = " ";
-
-    void startPlayingSound(float gainCompensation = 1.0f);
-    float changeEarcupPosition(char position); // returns a dimension from top to the earcup
-    void imitateSurround(bool isSurround = false);
-
-    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
-    void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
-    std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
-
-    Microphone mike;
-};
 /*
 4) Washing machine
 5 properties:
@@ -632,18 +582,7 @@ struct Headphones
     2) wash clothes
     3) change washing mode automatically
 */
-struct WashingMachine
-{
-    float volume = 6.0f;
-    float rpm = 75.0f;
-    int powerSupplyVoltage = 220;
-    float noiseLevel = 50.0f;
-    std::string brand = " ";
-        
-    bool changeWater(char timer, bool checkTemperatureBeforeChange = false, bool changeDuringWorkflow = true); // returns True on success
-    float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
-    void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
-};
+
 /*
 5) Envelop section:
 5 properties:
@@ -653,14 +592,7 @@ struct WashingMachine
     4) sustain amount (float)
     5) release time (float)
 */
-struct EnvelopSection
-{
-    float attackTime = 0.1f;
-    float holdTime = 0.1f;
-    float decayMagnitude = 0.75f;
-    float sustainMagnitude = 0.25f;
-    float releaseTime = 0.5f;
-};
+
 /*
 6) Oscillator section:
 5 properties:
@@ -670,30 +602,7 @@ struct EnvelopSection
     4) pan (float)
     5) amount of voices (short)
 */
-struct OscillatorSection
-{
-    struct Waveform
-    {
-        std::string waveformName = "sine";
-        bool keyTrack = true;
-        int initialPhase = 180;
 
-        void invertPhase(int initialPhase);
-        void useFadeIn(float fadeInDuration = 0.01f);
-        void fillEntireWaveTable(char transformationTypeIndex = 0);
-    };
-    char waveformIndex = 0;
-    float unisonSpread = 0.5f;
-    float level = 0.67f;
-    float pan = 0.0f;
-    short amountOfVoices = 1;
-
-    std::string getWaveformName(Waveform requestedWaveform); // returns waveform's name
-    bool getKeyTrackState(Waveform requestedWaveform); // returns key tracking state
-    void trackPhase(Waveform targetWaveform);
-
-    Waveform sine;
-};
 /*
 7) Filter section:
 5 properties:
@@ -703,14 +612,7 @@ struct OscillatorSection
     4) mix (float)
     5) comb pattern index (char)
 */
-struct FilterSection
-{
-    float cutFrequency = 15000.0f;
-    float qualityFactor = 1.0f;
-    float gain = 0.0f;
-    float mix = 1.0f;
-    char combPatternIndex = 0;
-};
+
 /*
 8) FX section:
 5 properties:
@@ -720,14 +622,7 @@ struct FilterSection
     4) compression ratio (float)
     5) FX mix (float)
 */
-struct FXSection
-{
-    float distortionAmount = 0.5f;
-    float delayTime = 0.25f;
-    float reverbTime = 0.5f;
-    float compressionRatio = 4.0f;
-    float mix = 1.0f;
-};
+
 /*
 9) LFO section:
 5 properties:
@@ -737,14 +632,7 @@ struct FXSection
     4) stereo spreader (int)
     5) trigger mode index (char)
 */
-struct LFOSection
-{
-    char amountOfEnvelopPoints = 3;
-    char curveFormIndex = 1;
-    bool gridSnapping = false;
-    int stereoSpreader = 100;
-    char triggerModeIndex = 1;
-};
+
 /*
 10) Synth Application
 5 properties:
@@ -758,20 +646,6 @@ struct LFOSection
     2) modulate one oscillator with another
     3) toggle FX element
 */
-struct SynthApplication
-{
-    EnvelopSection envelope;
-    OscillatorSection oscillator;
-    FilterSection filter;
-    FXSection FX1;
-    LFOSection LFO1;
-    
-    void toggleFXElement(FXSection elementToToggle);
-    bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
-    void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
-                                          OscillatorSection targetOscillator,
-                                          float modulationDepth);
-};
 
 /*
 =================
@@ -1252,5 +1126,149 @@ Part 1e - Step 19: Request a review
 /*
 paste your code below
 */
+struct Phone
+{
+    int memoryAmount = 128;
+    char numberOfCPUCores = 4;
+    float screenSize = 5.8f;
+    float cameraResolution = 20.5f;
+    float thickness = 0.75f;
 
+    void recieveCalls(int number);
+    void capturePhoto(bool frontCamera = false);
+    std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
+};
+
+struct AirConditioner
+{
+    float price = 1.95f;
+    int screenWidth = 10;
+    short remoteDistance = 20;
+    float temperatureRange = 55.6f;
+    short power = 24;
+
+    bool turnOffAutomatically(char timer); // returns True on success
+    void startCooling(float targetTemperature, char timer = 0);
+    void decreaseHumidity(short targetRelativeHumidity);
+};
+
+struct Headphones
+{
+    struct Microphone
+    {
+        float inputGain = 0.25f;
+        bool flexibleConstruction = false;
+        bool EnablementState = true;
+
+        void setState(bool state);
+        bool getState(bool toggleStateOnRequest = false);
+        float trackInputLevel(bool useGainToDecibelsTransformation = false, bool strobeLedOnClipping = false);
+    };
+
+    int impedance = 250;
+    float spectrumDistribution = 3.3f;
+    char wireLength = 3;
+    bool isClosed = false;
+    std::string manufacturer = " ";
+
+    void startPlayingSound(float gainCompensation = 1.0f);
+    float changeEarcupPosition(char position); // returns a dimension from top to the earcup
+    void imitateSurround(bool isSurround = false);
+
+    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
+    void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
+    std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
+
+    Microphone mike;
+};
+
+struct WashingMachine
+{
+    float volume = 6.0f;
+    float rpm = 75.0f;
+    int powerSupplyVoltage = 220;
+    float noiseLevel = 50.0f;
+    std::string brand = " ";
+        
+    bool changeWater(char timer, bool checkTemperatureBeforeChange = false, bool changeDuringWorkflow = true); // returns True on success
+    float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
+    void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
+};
+
+struct EnvelopSection
+{
+    float attackTime = 0.1f;
+    float holdTime = 0.1f;
+    float decayMagnitude = 0.75f;
+    float sustainMagnitude = 0.25f;
+    float releaseTime = 0.5f;
+};
+
+struct OscillatorSection
+{
+    struct Waveform
+    {
+        std::string waveformName = "sine";
+        bool keyTrack = true;
+        int initialPhase = 180;
+
+        void invertPhase(int initialPhase);
+        void useFadeIn(float fadeInDuration = 0.01f);
+        void fillEntireWaveTable(char transformationTypeIndex = 0);
+    };
+    char waveformIndex = 0;
+    float unisonSpread = 0.5f;
+    float level = 0.67f;
+    float pan = 0.0f;
+    short amountOfVoices = 1;
+
+    std::string getWaveformName(Waveform requestedWaveform); // returns waveform's name
+    bool getKeyTrackState(Waveform requestedWaveform); // returns key tracking state
+    void trackPhase(Waveform targetWaveform);
+
+    Waveform sine;
+};
+
+struct FilterSection
+{
+    float cutFrequency = 15000.0f;
+    float qualityFactor = 1.0f;
+    float gain = 0.0f;
+    float mix = 1.0f;
+    char combPatternIndex = 0;
+};
+
+struct FXSection
+{
+    float distortionAmount = 0.5f;
+    float delayTime = 0.25f;
+    float reverbTime = 0.5f;
+    float compressionRatio = 4.0f;
+    float mix = 1.0f;
+};
+
+struct LFOSection
+{
+    char amountOfEnvelopPoints = 3;
+    char curveFormIndex = 1;
+    bool gridSnapping = false;
+    int stereoSpreader = 100;
+    char triggerModeIndex = 1;
+};
+
+struct SynthApplication
+{
+    EnvelopSection envelope;
+    OscillatorSection oscillator;
+    FilterSection filter;
+    FXSection FX1;
+    LFOSection LFO1;
+    
+    void toggleFXElement(FXSection elementToToggle);
+    bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
+    void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
+                                          OscillatorSection targetOscillator,
+                                          float modulationDepth);
+};
+//============================================================
 int main() { std::cout << "good to go!" << std::endl; }
