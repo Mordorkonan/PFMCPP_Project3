@@ -1202,6 +1202,10 @@ struct EnvelopSection
     float decayMagnitude = 0.75f;
     float sustainMagnitude = 0.25f;
     float releaseTime = 0.5f;
+
+    void drawEnvelopGraphics(float attack, float hold, float decay, float sustain, float release);
+    void applyAttackConvex(float convexIntensity);
+    float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
 };
 
 struct OscillatorSection
@@ -1236,6 +1240,10 @@ struct FilterSection
     float gain = 0.0f;
     float mix = 1.0f;
     char combPatternIndex = 0;
+
+    std::string getFilteringAlgorithm(bool considerMixAmount = false); // returns algorithm of filtering
+    void setParametricQuality(float coefficientOfQualityAndGainInteraction);
+    void flipHorizontally(float pivotFrequencyOffset);
 };
 
 struct FXSection
@@ -1245,6 +1253,10 @@ struct FXSection
     float reverbTime = 0.5f;
     float compressionRatio = 4.0f;
     float mix = 1.0f;
+
+    void applyLowCutPreFiltering(float lowCutFrequency, float resonance);
+    float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
+    void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
 };
 
 struct LFOSection
@@ -1254,6 +1266,10 @@ struct LFOSection
     bool gridSnapping = false;
     int stereoSpreader = 100;
     char triggerModeIndex = 1;
+
+    void flipVertically(bool considerAutomationBipolarity = false);
+    bool isConcavityGrouped(bool considerOnlySelectedSegments = false); // returns true if concavity is being edited for all segments simultaneously
+    void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
 };
 
 struct SynthApplication
