@@ -548,9 +548,9 @@ struct Phone
     float cameraResolution = 20.5f;
     float thickness = 0.75f;
 
-    // 1) recieve calls
-    // 2) capture photos
-    // 3) show messages
+    void recieveCalls(int number);
+    void capturePhoto(bool frontCamera = false);
+    std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
 };
 /*
 2) Air conditioner
@@ -573,9 +573,9 @@ struct AirConditioner
     float temperatureRange = 55.6f;
     short power = 24;
 
-    // 1) turn off automatically
-    // 2) start cooling
-    // 3) decrease humidity
+    bool turnOffAutomatically(char timer); // returns True on success
+    void startCooling(float targetTemperature, char timer = 0);
+    void decreaseHumidity(short targetRelativeHumidity);
 };
 /*
 3) headphones
@@ -598,9 +598,9 @@ struct Headphones
     bool isClosed = false;
     std::string manufacturer = " ";
 
-    // 1) play sound
-    // 2) change earcup position
-    // 3) imitate surround
+    void startPlayingSound(float gainCompensation = 1.0f);
+    float changeEarcupPosition(char position); // returns a dimension from top to the earcup
+    void imitateSurround(bool isSurround = false);
 };
 /*
 4) Washing machine
@@ -623,9 +623,9 @@ struct WashingMachine
     float noiseLevel = 50.0f;
     std::string brand = " ";
         
-    // 1) change water
-    // 2) wash clothes
-    // 3) change washing mode automatically
+    bool changeWater(char timer, bool checkTemperatureBeforeChange = false, bool changeDuringWorkflow = true); // returns True on success
+    float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
+    void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
 };
 /*
 5) Envelop section:
@@ -733,9 +733,11 @@ struct SynthApplication
     FXSection FX1;
     LFOSection LFO1;
 
-    // 1) apply filtration
-    // 2) modulate one oscillator with another
-    // 3) toggle FX element
+    bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
+    void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
+                                          OscillatorSection targetOscillator,
+                                          float modulationDepth);
+    void toggleFXElement(FXSection elementToToggle);
 };
 /*
 =================
