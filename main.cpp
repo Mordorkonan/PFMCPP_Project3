@@ -540,7 +540,18 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     2) capture photos
     3) show messages
 */
-struct Phone {};
+struct Phone
+{
+    // 1) memory amount (int)
+    // 2) number of CPU cores (char)
+    // 3) screen size (float)
+    // 4) camera resolution (float)
+    // 5) thickness (float)
+
+    // 1) recieve calls
+    // 2) capture photos
+    // 3) show messages
+};
 /*
 2) Air conditioner
 5 properties:
@@ -554,7 +565,18 @@ struct Phone {};
     2) start cooling
     3) decrease humidity
 */
-struct AirConditioner {};
+struct AirConditioner
+{
+    // 1) price (float)
+    // 2) screen width (int)
+    // 3) remote distance (short)
+    // 4) temperature range (float)
+    // 5) power (short)
+
+    // 1) turn off automatically
+    // 2) start cooling
+    // 3) decrease humidity
+};
 /*
 3) headphones
 5 properties:
@@ -568,7 +590,18 @@ struct AirConditioner {};
     2) change earcup position
     3) imitate surround
 */
-struct Headphones {};
+struct Headphones
+{
+    // 1) impedance (int)
+    // 2) spectrum distribution (float)
+    // 3) wire length (char)
+    // 4) closed or not (bool)
+    // 5) manufacturer (std::string)
+
+    // 1) play sound
+    // 2) change earcup position
+    // 3) imitate surround
+};
 /*
 4) Washing machine
 5 properties:
@@ -582,7 +615,18 @@ struct Headphones {};
     2) wash clothes
     3) change washing mode automatically
 */
-struct WashingMachine {};
+struct WashingMachine
+{
+    // 1) volume (float)
+    // 2) rpm (float)
+    // 3) power supply voltage (int)
+    // 4) noise level (float)
+    // 5) brand (std::string)
+        
+    // 1) change water
+    // 2) wash clothes
+    // 3) change washing mode automatically
+};
 /*
 5) Envelop section:
 5 properties:
@@ -592,7 +636,14 @@ struct WashingMachine {};
     4) sustain amount (float)
     5) release time (float)
 */
-struct EnvelopSection {};
+struct EnvelopSection
+{
+    // 1) attack time (float)
+    // 2) hold time (float)
+    // 3) decay amount (float)
+    // 4) sustain amount (float)
+    // 5) release time (float)
+};
 /*
 6) Oscillator section:
 5 properties:
@@ -602,7 +653,14 @@ struct EnvelopSection {};
     4) pan (float)
     5) amount of voices (short)
 */
-struct OscillatorSection {};
+struct OscillatorSection
+{
+    // 1) waveform index (char)
+    // 2) unison spread (float)
+    // 3) level (float)
+    // 4) pan (float)
+    // 5) amount of voices (short)
+};
 /*
 7) Filter section:
 5 properties:
@@ -612,7 +670,14 @@ struct OscillatorSection {};
     4) mix (float)
     5) comb pattern index (char)
 */
-struct FilterSection {};
+struct FilterSection
+{
+    // 1) cut frequency (float)
+    // 2) quality factor (float)
+    // 3) gain (float)
+    // 4) mix (float)
+    // 5) comb pattern index (char)
+};
 /*
 8) FX section:
 5 properties:
@@ -622,7 +687,14 @@ struct FilterSection {};
     4) compression ratio (float)
     5) FX mix (float)
 */
-struct FXSection {};
+struct FXSection
+{
+    // 1) distortion amount (float)
+    // 2) delay time (float)
+    // 3) reverb time (float)
+    // 4) compression ratio (float)
+    // 5) FX mix (float)
+};
 /*
 9) LFO section:
 5 properties:
@@ -632,7 +704,14 @@ struct FXSection {};
     4) stereo spreader (int)
     5) trigger mode index (char)
 */
-struct LFOSection {};
+struct LFOSection
+{
+    // 1) amount of envelop points (char)
+    // 2) curve form (char)
+    // 3) grid snapping (bool)
+    // 4) stereo spreader (int)
+    // 5) trigger mode index (char)
+};
 /*
 10) Synth Application
 5 properties:
@@ -646,7 +725,18 @@ struct LFOSection {};
     2) modulate one oscillator with another
     3) toggle FX element
 */
-struct SynthApplication {};
+struct SynthApplication
+{
+    // 1) Envelope section (Envelop)
+    // 2) Oscillator section (Oscillator)
+    // 3) Filter section (Filter)
+    // 4) FX section (FX)
+    // 5) LFO section (LFO)
+
+    // 1) apply filtration
+    // 2) modulate one oscillator with another
+    // 3) toggle FX element
+};
 /*
 =================
 Part 1d - Step 7: Commit
