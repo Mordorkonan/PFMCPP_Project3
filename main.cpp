@@ -592,6 +592,17 @@ struct AirConditioner
 */
 struct Headphones
 {
+    struct Microphone
+    {
+        float inputGain = 0.25f;
+        bool flexibleConstruction = false;
+        bool EnablementState = true;
+
+        void setState(bool state);
+        bool getState(bool toggleStateOnRequest = false);
+        float trackInputLevel(bool useGainToDecibelsTransformation = false, bool strobeLedOnClipping = false);
+    };
+
     int impedance = 250;
     float spectrumDistribution = 3.3f;
     char wireLength = 3;
@@ -655,6 +666,16 @@ struct EnvelopSection
 */
 struct OscillatorSection
 {
+    struct Waveform
+    {
+        std::string waveformName = "sine";
+        bool keyTrack = true;
+        int initialPhase = 180;
+
+        void invertPhase(int initialPhase);
+        void useFadeIn(float fadeInDuration = 0.01f);
+        void fillEntireWaveTable(char transformationTypeIndex = 0);
+    };
     char waveformIndex = 0;
     float unisonSpread = 0.5f;
     float level = 0.67f;
