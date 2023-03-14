@@ -772,6 +772,7 @@ struct SynthApplication
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
 };
+
 /*
 =================
 Part 1d - Step 7: Commit
