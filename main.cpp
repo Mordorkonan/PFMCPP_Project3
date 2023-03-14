@@ -612,6 +612,12 @@ struct Headphones
     void startPlayingSound(float gainCompensation = 1.0f);
     float changeEarcupPosition(char position); // returns a dimension from top to the earcup
     void imitateSurround(bool isSurround = false);
+
+    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
+    void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
+    std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
+
+    Microphone mike;
 };
 /*
 4) Washing machine
@@ -681,6 +687,12 @@ struct OscillatorSection
     float level = 0.67f;
     float pan = 0.0f;
     short amountOfVoices = 1;
+
+    std::string getWaveformName(Waveform requestedWaveform); // returns waveform's name
+    bool getKeyTrackState(Waveform requestedWaveform); // returns key tracking state
+    void trackPhase(Waveform targetWaveform);
+
+    Waveform sine;
 };
 /*
 7) Filter section:
