@@ -765,12 +765,12 @@ struct SynthApplication
     FilterSection filter;
     FXSection FX1;
     LFOSection LFO1;
-
+    
+    void toggleFXElement(FXSection elementToToggle);
     bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
     void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
-    void toggleFXElement(FXSection elementToToggle);
 };
 /*
 =================
