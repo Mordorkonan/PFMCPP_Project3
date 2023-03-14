@@ -539,7 +539,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     1) recieve calls
     2) capture photos
     3) show messages
-
+*/
+struct Phone {};
+/*
 2) Air conditioner
 5 properties:
     1) price (float)
@@ -551,7 +553,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     1) turn off automatically
     2) start cooling
     3) decrease humidity
-
+*/
+struct AirConditioner {};
+/*
 3) headphones
 5 properties:
     1) impedance (int)
@@ -563,7 +567,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     1) play sound
     2) change earcup position
     3) imitate surround
-
+*/
+struct Headphones {};
+/*
 4) Washing machine
 5 properties:
     1) volume (float)
@@ -575,7 +581,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     1) change water
     2) wash clothes
     3) change washing mode automatically
-
+*/
+struct WashingMachine {};
+/*
 5) Envelop section:
 5 properties:
     1) attack time (float)
@@ -583,7 +591,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     3) decay amount (float)
     4) sustain amount (float)
     5) release time (float)
-
+*/
+struct EnvelopSection {};
+/*
 6) Oscillator section:
 5 properties:
     1) waveform index (char)
@@ -591,7 +601,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     3) level (float)
     4) pan (float)
     5) amount of voices (short)
-
+*/
+struct OscillatorSection {};
+/*
 7) Filter section:
 5 properties:
     1) cut frequency (float)
@@ -599,7 +611,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     3) gain (float)
     4) mix (float)
     5) comb pattern index (char)
-
+*/
+struct FilterSection {};
+/*
 8) FX section:
 5 properties:
     1) distortion amount (float)
@@ -607,7 +621,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     3) reverb time (float)
     4) compression ratio (float)
     5) FX mix (float)
-
+*/
+struct FXSection {};
+/*
 9) LFO section:
 5 properties:
     1) amount of envelop points (char)
@@ -615,7 +631,9 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     3) grid snapping (bool)
     4) stereo spreader (int)
     5) trigger mode index (char)
-
+*/
+struct LFOSection {};
+/*
 10) Synth Application
 5 properties:
     1) Envelope section (Envelop)
@@ -628,7 +646,7 @@ numerical order (1 - 10). simply CUT and PASTE them in the space provided below:
     2) modulate one oscillator with another
     3) toggle FX element
 */
-
+struct SynthApplication {};
 /*
 =================
 Part 1d - Step 7: Commit
