@@ -1257,4 +1257,7 @@ struct SynthApplication
                                           float modulationDepth);
 };
 //============================================================
-int main() { std::cout << "good to go!" << std::endl; }
+int main()
+{ 
+    std::cout << "good to go!" << std::endl; 
+}
