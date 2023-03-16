@@ -83,51 +83,51 @@ Main Object: Car Interior
         Name 4 nouns you'll find on the [Sub Object]
             1) paddle shifters
             2) 'cruise control' controls
-            3) 
-            4) 
+            3) manufacturer logo
+            4) airbag
         Name 2 actions that the [Sub Object] can do:
             1) adjust cruise control settings.
-            2)
-        
+            2) shift gears
+
     Sub Object: Instrument Cluster
         Name 4 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
-            4)
+            1) speedometer
+            2) gas meter
+            3) thermometer
+            4) voltmeter
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
-    
+            1) show battery charge
+            2) show gas level
+            3) measure temperature
+
     Sub Object: Environment Controls
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) door blocker
+            2) wiper activator
+            3) climate control
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) turn on the wiper
+            2) lock the door
+            3) change heat level
 
     Sub Object: Infotainment System
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) clock
+            2) audio player
+            3) video screen
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) show time
+            2) play audio
+            3) show video
 
-    Sub Object: Seat 
+    Sub Object: Seat
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) armrest
+            2) seat back
+            3) seat coating
         Name 2 actions that the [Sub Object] can do:
-            1)
-            2)
+            1) change back angle
+            2) move forward
 */
 
 /*
@@ -195,54 +195,6 @@ Part 1b - Step 2: Assignment
         primitives.
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
-
-Thing 1)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 2)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 3)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 4)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
 */
 
 /*
@@ -318,6 +270,42 @@ example:
         Brightness (double)
         area in cm2 (int)
         brand (std::string)
+
+example:
+    Display:
+        Number of Pixels (int)
+        Amount of Power consumed (milliwatt-hours) (float)
+        Brightness (double)
+        area in cm2 (int)
+        brand (std::string)
+
+    Phone:
+        memory amount (int)
+        number of CPU cores (char)
+        screen size (float)
+        camera resolution (float)
+        thickness (float)
+
+    Air conditioner:
+        price (float)
+        screen width (int)
+        remote distance (short)
+        temperature range (float)
+        power (short)
+
+    Headphones:
+        1) impedance (int)
+        2) spectrum distribution (float)
+        3) wire length (short)
+        4) closed or not (bool)
+        5) manufacturer (str::string)
+
+    Washing machine:
+        1) volume (float)
+        2) rpm (float)
+        3) power supply voltage (int)
+        4) noise level (float)
+        5) brand (std::string)
 */
 
 /*
@@ -336,21 +324,9 @@ Part 1c - Step 4: Assignment
 Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will be their own UDTs 
     you'll define these 5 sub-objects in Part 1d.
-
-Thing 10)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
  */
 
- /*
+/*
 =================
 Part 1c - Step 5: Commit
 =================
@@ -434,65 +410,65 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
+Thing 5) Envelop section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) attack time
+    2) hold time
+    3) decay amount
+    4) sustain amount
+    5) release time
 3 things it can do:
-    1)
-    2)
-    3)
+    1) hold the signal level with sustain
+    2) increase signal level over attack time
+    3) decrease signal level over release time
 
-Thing 6)
+Thing 6) Oscillator section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) waveform index
+    2) unison spread
+    3) level
+    4) pan
+    5) amount of voices
 3 things it can do:
-    1)
-    2)
-    3)
+    1) produce the signal
+    2) pass signal as modulating
+    3) move over wavetable
 
-Thing 7)
+Thing 7) Filter section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) cut frequency
+    2) quality factor
+    3) gain
+    4) mix
+    5) comb pattern index
 3 things it can do:
-    1)
-    2)
-    3)
+    1) transform input signal
+    2) transform comb pattern
+    3) move cut frequency
 
-Thing 8)
+Thing 8) FX section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) distortion amount
+    2) delay time
+    3) reverb time
+    4) compression ratio
+    5) FX mix
 3 things it can do:
-    1)
-    2)
-    3)
+    1) apply soft clipping
+    2) copy signal for delay
+    3) suppress input signal with ratio
 
-Thing 9)
+Thing 9) LFO section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) amount of envelop points
+    2) curve form
+    3) grid snapping
+    4) stereo spreader
+    5) trigger mode index
 3 things it can do:
-    1)
-    2)
-    3)
+    1) initiate envelop on key release
+    2) modulate following speed
+    3) change curve concave factor
  */
 
 /*
@@ -543,14 +519,125 @@ MOVE THEM to the space below this block comment and put them in numerical order
     I do not want to see 2 copies of your Plain-English UDTs.  
     I only want to see the 10 UDTs written BELOW this block comment, in numerical order (1 - 10).
     simply CUT and PASTE them in the space provided below:
+
+1) Phone
+5 properties:
+    1) memory amount (int)
+    2) number of CPU cores (char)
+    3) screen size (float)
+    4) camera resolution (float)
+    5) thickness (float)
+3 things it can do:
+    1) recieve calls
+    2) capture photos
+    3) show messages
 */
 
+/*
+2) Air conditioner
+5 properties:
+    1) price (float)
+    2) screen width (int)
+    3) remote distance (short)
+    4) temperature range (float)
+    5) power (short)
+3 things it can do:
+    1) turn off automatically
+    2) start cooling
+    3) decrease humidity
+*/
 
+/*
+3) headphones
+5 properties:
+    1) impedance (int)
+    2) spectrum distribution (float)
+    3) wire length (char)
+    4) closed or not (bool)
+    5) manufacturer (std::string)
+3 things it can do:
+    1) play sound
+    2) change earcup position
+    3) imitate surround
+*/
 
+/*
+4) Washing machine
+5 properties:
+    1) volume (float)
+    2) rpm (float)
+    3) power supply voltage (int)
+    4) noise level (float)
+    5) brand (std::string)
+3 things it can do:
+    1) change water
+    2) wash clothes
+    3) change washing mode automatically
+*/
 
+/*
+5) Envelop section:
+5 properties:
+    1) attack time (float)
+    2) hold time (float)
+    3) decay amount (float)
+    4) sustain amount (float)
+    5) release time (float)
+*/
 
+/*
+6) Oscillator section:
+5 properties:
+    1) waveform index (char)
+    2) unison spread (float)
+    3) level (float)
+    4) pan (float)
+    5) amount of voices (short)
+*/
 
+/*
+7) Filter section:
+5 properties:
+    1) cut frequency (float)
+    2) quality factor (float)
+    3) gain (float)
+    4) mix (float)
+    5) comb pattern index (char)
+*/
 
+/*
+8) FX section:
+5 properties:
+    1) distortion amount (float)
+    2) delay time (float)
+    3) reverb time (float)
+    4) compression ratio (float)
+    5) FX mix (float)
+*/
+
+/*
+9) LFO section:
+5 properties:
+    1) amount of envelop points (char)
+    2) curve form (char)
+    3) grid snapping (bool)
+    4) stereo spreader (int)
+    5) trigger mode index (char)
+*/
+
+/*
+10) Synth Application
+5 properties:
+    1) Envelope section (Envelop)
+    2) Oscillator section (Oscillator)
+    3) Filter section (Filter)
+    4) FX section (FX)
+    5) LFO section (LFO)
+3 things it can do:
+    1) apply filtration
+    2) modulate one oscillator with another
+    3) toggle FX element
+*/
 
 /*
 =================
@@ -1009,16 +1096,168 @@ Part 1e - Step 19: Request a review
 /*
 paste your code below
 */
-
-
-
-
-
-
-
-
-
-int main()
+struct Phone
 {
-    std::cout << "good to go!" << std::endl;
+    int memoryAmount = 128;
+    char numberOfCPUCores = 4;
+    float screenSize = 5.8f;
+    float cameraResolution = 20.5f;
+    float thickness = 0.75f;
+
+    void recieveCalls(int number);
+    void capturePhoto(bool frontCamera = false);
+    std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
+};
+
+struct AirConditioner
+{
+    float price = 1.95f;
+    int screenWidth = 10;
+    short remoteDistance = 20;
+    float temperatureRange = 55.6f;
+    short power = 24;
+
+    bool turnOffAutomatically(char timer); // returns True on success
+    void startCooling(float targetTemperature, char timer = 0);
+    void decreaseHumidity(short targetRelativeHumidity);
+};
+
+struct Headphones
+{
+    struct Microphone
+    {
+        float inputGain = 0.25f;
+        bool flexibleConstruction = false;
+        bool EnablementState = true;
+
+        void setState(bool state);
+        bool getState(bool toggleStateOnRequest = false);
+        float trackInputLevel(bool useGainToDecibelsTransformation = false, bool strobeLedOnClipping = false);
+    };
+
+    int impedance = 250;
+    float spectrumDistribution = 3.3f;
+    char wireLength = 3;
+    bool isClosed = false;
+    std::string manufacturer = " ";
+
+    void startPlayingSound(float gainCompensation = 1.0f);
+    float changeEarcupPosition(char position); // returns a dimension from top to the earcup
+    void imitateSurround(bool isSurround = false);
+
+    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
+    void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
+    std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
+
+    Microphone mike;
+};
+
+struct WashingMachine
+{
+    float volume = 6.0f;
+    float rpm = 75.0f;
+    int powerSupplyVoltage = 220;
+    float noiseLevel = 50.0f;
+    std::string brand = " ";
+        
+    bool changeWater(char timer, bool checkTemperatureBeforeChange = false, bool changeDuringWorkflow = true); // returns True on success
+    float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
+    void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
+};
+
+struct EnvelopSection
+{
+    float attackTime = 0.1f;
+    float holdTime = 0.1f;
+    float decayMagnitude = 0.75f;
+    float sustainMagnitude = 0.25f;
+    float releaseTime = 0.5f;
+
+    void drawEnvelopGraphics(float attack, float hold, float decay, float sustain, float release);
+    void applyAttackConvex(float convexIntensity);
+    float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
+};
+
+struct OscillatorSection
+{
+    struct Waveform
+    {
+        std::string waveformName = "sine";
+        bool keyTrack = true;
+        int initialPhase = 180;
+
+        void invertPhase(int initialPhase);
+        void useFadeIn(float fadeInDuration = 0.01f);
+        void fillEntireWaveTable(char transformationTypeIndex = 0);
+    };
+    char waveformIndex = 0;
+    float unisonSpread = 0.5f;
+    float level = 0.67f;
+    float pan = 0.0f;
+    short amountOfVoices = 1;
+
+    std::string getWaveformName(Waveform requestedWaveform); // returns waveform's name
+    bool getKeyTrackState(Waveform requestedWaveform); // returns key tracking state
+    void trackPhase(Waveform targetWaveform);
+
+    Waveform sine;
+};
+
+struct FilterSection
+{
+    float cutFrequency = 15000.0f;
+    float qualityFactor = 1.0f;
+    float gain = 0.0f;
+    float mix = 1.0f;
+    char combPatternIndex = 0;
+
+    std::string getFilteringAlgorithm(bool considerMixAmount = false); // returns algorithm of filtering
+    void setParametricQuality(float coefficientOfQualityAndGainInteraction);
+    void flipHorizontally(float pivotFrequencyOffset);
+};
+
+struct FXSection
+{
+    float distortionAmount = 0.5f;
+    float delayTime = 0.25f;
+    float reverbTime = 0.5f;
+    float compressionRatio = 4.0f;
+    float mix = 1.0f;
+
+    void applyLowCutPreFiltering(float lowCutFrequency, float resonance);
+    float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
+    void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
+};
+
+struct LFOSection
+{
+    char amountOfEnvelopPoints = 3;
+    char curveFormIndex = 1;
+    bool gridSnapping = false;
+    int stereoSpreader = 100;
+    char triggerModeIndex = 1;
+
+    void flipVertically(bool considerAutomationBipolarity = false);
+    bool isConcavityGrouped(bool considerOnlySelectedSegments = false); // returns true if concavity is being edited for all segments simultaneously
+    void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
+};
+
+struct SynthApplication
+{
+    EnvelopSection envelope;
+    OscillatorSection oscillator;
+    FilterSection filter;
+    FXSection FX1;
+    LFOSection LFO1;
+    
+    void toggleFXElement(FXSection elementToToggle);
+    bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
+    void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
+                                          OscillatorSection targetOscillator,
+                                          float modulationDepth);
+};
+//============================================================
+int main()
+{ 
+    std::cout << "good to go!" << std::endl; 
 }
