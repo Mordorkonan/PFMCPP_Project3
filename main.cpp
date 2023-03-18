@@ -116,7 +116,6 @@ struct Person
         int numFingers;
         int stepCounter = 0;
 
-        void move();
         float defineSizeUsingHeight(int height);
         void stepForward(); // might be bool as well to define if the step is performed
         float stepSize(); // might be int for better memory management
@@ -127,14 +126,12 @@ struct Person
     float hairLength;
     float GPA;
     unsigned int SATScore;
-    int distanceTraveled;
+    float distanceTraveled;
     Limb leftFoot, rightFoot;
 
     void run(int howFast, bool startWithLeftFoot);
 
 };
-
-Person p;
 
 void Person::run(int howFast, bool startWithLeftFoot)
 {
@@ -149,18 +146,19 @@ void Person::run(int howFast, bool startWithLeftFoot)
         leftFoot.stepForward();
     }
 
-    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+    distanceTraveled = leftFoot.stepSize() + rightFoot.stepSize();
+    std::cout << "Distance traveled is " << distanceTraveled << " with " << howFast << " speed\n";
 }
 
 void Person::Limb::stepForward()
 {
-    move();
+    std::cout << "Step forward\n";
     stepCounter++;
 }
 
 float Person::Limb::stepSize()
 {
-    return defineSizeUsingHeight(p.height);    
+    return 40.0f;   
 }
 
  /*
@@ -198,6 +196,34 @@ struct Phone
     std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
 };
 
+void Phone::recieveCalls(int number)
+{
+    std::cout << "Function 'recieveCalls()' has been called\n"
+              << "Incoming call from " << number << std::endl;
+}
+
+void Phone::capturePhoto(bool frontCamera)
+{
+    if (frontCamera)
+    {
+        std::cout << "Photo captured from front camera\n";
+    }
+    else
+    {
+        std::cout << "Photo captured from main camera\n";
+    }
+}
+
+std::string Phone::showMessage(int number, bool appendSenderName)
+{
+    std::cout << "You gote a message from " << number << std::endl;
+    if (appendSenderName)
+    {
+        std::cout << "Sender: \n";
+    }
+    return "Incoming message";
+}
+
 struct AirConditioner
 {
     float price = 1.95f;
@@ -211,6 +237,24 @@ struct AirConditioner
     void decreaseHumidity(short targetRelativeHumidity);
 };
 
+bool AirConditioner::turnOffAutomatically(char timer)
+{
+    if (timer > 0) return true;
+    return false;
+}
+
+void AirConditioner::startCooling(float targetTemperature, char timer)
+{
+    std::cout << "Cooling started. Trying to reach " << targetTemperature << std::endl;
+    if (timer > 0)
+        std::cout << "Cooling ends in " << timer << " hours\n";
+}
+
+void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
+{
+    std::cout << "Activated humidity decrescent to " << targetRelativeHumidity << std::endl;
+}
+
 struct Headphones
 {
     struct Microphone
@@ -218,6 +262,7 @@ struct Headphones
         float inputGain = 0.25f;
         bool flexibleConstruction = false;
         bool EnablementState = true;
+        bool currentState = false;
 
         void setState(bool state);
         bool getState(bool toggleStateOnRequest = false);
@@ -241,6 +286,48 @@ struct Headphones
     Microphone mike;
 };
 
+void Headphones::Microphone::setState(bool state)
+{
+    std::cout << "Microphone state changed to " << state << std::endl;
+}
+
+bool Headphones::Microphone::getState(bool toggleStateOnRequest)
+{
+    if (toggleStateOnRequest)
+        currentState = !currentState;
+    return currentState;
+}
+
+float Headphones::Microphone::trackInputLevel(bool useGainToDecibelsTransformation, bool strobeLedOnClipping)
+{
+    float inputLevel = -4.3f; // arbitralily taken value supposed to be recieved from input gain controller state
+    if (useGainToDecibelsTransformation)
+        std::cout << "Gain to Decibels transformation applied\nInput level is " << inputLevel << std::endl;
+    if (strobeLedOnClipping)
+        std::cout << "Signal has been sent to LED\n";
+    return inputLevel;
+}
+
+void Headphones::startPlayingSound(float gainCompensation)
+{
+    float inputLevel = -4.3f * gainCompensation;
+    std::cout << "Playback started with level: " << inputLevel << std::endl;
+}
+
+float Headphones::changeEarcupPosition(char position)
+{
+    std::cout << "New earcup position has been set";
+    return position;
+}
+
+void Headphones::imitateSurround(bool isSurround)
+{
+    if (isSurround)
+        std::cout << "Surround imitation enabled\n";
+    else
+        std::cout << "Surround imitation disabled\n";
+}
+
 struct WashingMachine
 {
     float volume = 6.0f;
@@ -253,6 +340,29 @@ struct WashingMachine
     float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
     void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
 };
+
+bool WashingMachine::changeWater(char timer, bool checkTemperatureBeforeChange, bool changeDuringWorkflow)
+{
+    std::cout << "The water will be changed in " << timer << " minutes\n";
+    if (checkTemperatureBeforeChange)
+        std::cout << "Temperature will be checked before change\n";
+    if (changeDuringWorkflow)
+        std::cout << "Washing mode will be toggled during workflow\n";
+    bool waterChanged = true; // supposed to get false if something's going wrong
+    return waterChanged;
+}
+
+float WashingMachine::washClothes(float waterTemperature, int timer)
+{
+    if (timer > 0)
+        std::cout << "The machine will stop in " << timer << " minutes\n";
+    return waterTemperature;
+}
+
+void WashingMachine::changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer)
+{
+    std::cout << currentMode << " will be changed to " << targetMode << " in " << timer << " minutes\n";
+}
 
 struct EnvelopSection
 {
@@ -267,6 +377,28 @@ struct EnvelopSection
     float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
 };
 
+void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, float sustain, float release)
+{
+    std::cout << "Envelop drawn with next parameters:\n"
+              << "Attack: " << attack << "\n"
+              << "Hold: " << hold << "\n"
+              << "Decay: " << decay << "\n"
+              << "Sustain: " << sustain << "\n"
+              << "Release: " << release << "\n";
+}
+
+void EnvelopSection::applyAttackConvex(float convexIntensity)
+{
+    std::cout << "Attack convex changed to " << convexIntensity << std::endl;
+}
+
+float EnvelopSection::getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds)
+{
+    float signalDuration = attack + hold + release;
+    if (limitSustainWithTenSeconds) return 10.0f;
+    return signalDuration;
+}
+
 struct OscillatorSection
 {
     struct Waveform
@@ -279,6 +411,7 @@ struct OscillatorSection
         void useFadeIn(float fadeInDuration = 0.01f);
         void fillEntireWaveTable(char transformationTypeIndex = 0);
     };
+    std::string oscName = "Basic oscillator";
     char waveformIndex = 0;
     float unisonSpread = 0.5f;
     float level = 0.67f;
@@ -288,12 +421,54 @@ struct OscillatorSection
     std::string getWaveformName(Waveform requestedWaveform); // returns waveform's name
     bool getKeyTrackState(Waveform requestedWaveform); // returns key tracking state
     void trackPhase(Waveform targetWaveform);
+    void setName(std::string newOscName);
 
     Waveform sine;
 };
 
+void OscillatorSection::Waveform::invertPhase(int phase)
+{
+    if (phase < 0) phase += 180;
+    else phase -= 180;
+    std::cout << "Phase inverted";
+}
+
+void OscillatorSection::Waveform::useFadeIn(float fadeInDuration)
+{
+    std::cout << "Applied Fade In: " << fadeInDuration << std::endl;
+}
+
+void OscillatorSection::Waveform::fillEntireWaveTable(char transformationTypeIndex)
+{
+    std::cout << "Wavetable filled with transformation algorithm No: " << transformationTypeIndex << std::endl;
+}
+
+std::string OscillatorSection::getWaveformName(Waveform requestedWaveform)
+{
+    return requestedWaveform.waveformName;
+}
+
+bool OscillatorSection::getKeyTrackState(Waveform requestedWaveform)
+{
+    return requestedWaveform.keyTrack;
+}
+
+void OscillatorSection::trackPhase(Waveform targetWaveform)
+{
+    bool isPlaying = false; // checks if the midi-key is pushed
+    int phase = 181; // supposed to be refreshed every sync time tick
+    int currentPhase = !isPlaying ? targetWaveform.initialPhase : phase;
+    std::cout << "Phase is being tracked now\nCurrent phase is " << currentPhase << std::endl;
+}
+
+void OscillatorSection::setName(std::string newOscName)
+{
+    oscName = newOscName;
+}
+
 struct FilterSection
 {
+    std::string filterName = "Basic Filter";
     float cutFrequency = 15000.0f;
     float qualityFactor = 1.0f;
     float gain = 0.0f;
@@ -305,8 +480,27 @@ struct FilterSection
     void flipHorizontally(float pivotFrequencyOffset);
 };
 
-struct FXSection
+std::string FilterSection::getFilteringAlgorithm(bool considerMixAmount)
 {
+    std::string algorithmLine = "Filter Algorithm is normal";
+    std::string considerationLine = (considerMixAmount ? " with mix amount considered\n" : "\n");
+    std::cout << algorithmLine + considerationLine << std::endl;
+    return algorithmLine + considerationLine;
+}
+
+void FilterSection::setParametricQuality(float coefficientOfQualityAndGainInteraction)
+{
+    std::cout << "Quality is now bound to Gain with " << coefficientOfQualityAndGainInteraction << std::endl;
+}
+
+void FilterSection::flipHorizontally(float pivotFrequencyOffset)
+{
+    std::cout << "Filter pattern flipped with " << pivotFrequencyOffset << " horizontal offset\n";
+}
+
+struct FXSection
+{    
+    std::string FXname = "BasicFX";
     float distortionAmount = 0.5f;
     float delayTime = 0.25f;
     float reverbTime = 0.5f;
@@ -317,6 +511,24 @@ struct FXSection
     float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
     void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
 };
+
+void FXSection::applyLowCutPreFiltering(float lowCutFrequency, float resonance)
+{
+    std::cout << "Filtering applied with next parameters:\n"
+              << "Low Cut Frequency:" << lowCutFrequency << "\n"
+              << "Resonance: " << resonance << "\n";
+}
+
+float FXSection::returnRT60Time(float decayTime, float reverbSize)
+{
+    std::cout << "Calculating RT60 time\n";
+    return decayTime * (reverbSize * 0.35f);
+}
+
+void FXSection::setMixKnobExponential(float additionalExponentialCoefficient)
+{
+    std::cout << "Mix knob is now exponential with coefficient " << additionalExponentialCoefficient << std::endl;
+}
 
 struct LFOSection
 {
@@ -331,6 +543,53 @@ struct LFOSection
     void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
 };
 
+void LFOSection::flipVertically(bool considerAutomationBipolarity)
+{
+    std::string flipLine = "LFO flipped";
+    std::string considerationLine = considerAutomationBipolarity ? " with " : " without ";
+    std::string suffix = " automation bipolarity\n";
+    std::cout << flipLine + considerationLine + suffix << std::endl;
+}
+
+bool LFOSection::isConcavityGrouped(bool considerOnlySelectedSegments)
+{
+    if (considerOnlySelectedSegments)
+        std::cout << "considering selected segments\n";
+    bool isGrouped = false; // supposed to get state from algorithm of group checking 
+    return isGrouped;
+}
+
+void LFOSection::toggleGridSnapping(bool applyOnlyForEnabledState, bool applyOnlyForDisabledState)
+{
+    bool currentState = true; // supposed to get state during workflow
+    
+    if (applyOnlyForEnabledState && !applyOnlyForDisabledState)
+    {
+        if (currentState)
+        {
+            currentState = !currentState;
+            std::cout << "State toggled\n";
+        }
+    }
+        
+    else if (!applyOnlyForEnabledState && applyOnlyForDisabledState)
+    {
+        if (!currentState)
+        {
+            currentState = !currentState;
+            std::cout << "State toggled\n";
+        }
+    }
+
+    else if (applyOnlyForEnabledState && applyOnlyForDisabledState)
+        {
+            currentState = !currentState;
+            std::cout << "State toggled\n";
+        }
+    
+    else std::cout << "Toggling is not allowed\n";
+}
+
 struct SynthApplication
 {
     EnvelopSection envelope;
@@ -340,11 +599,33 @@ struct SynthApplication
     LFOSection LFO1;
     
     void toggleFXElement(FXSection elementToToggle);
-    bool applyFiltration(float mix, FilterSection filter); // returns if applies with no glitches
+    bool applyFiltration(float mix, FilterSection filter); // returns true if applies with no glitches
     void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
 };
+
+void SynthApplication::toggleFXElement(FXSection elementToToggle)
+{
+    std::cout << "Element " << elementToToggle.FXname << " toggled\n";
+}
+
+bool SynthApplication::applyFiltration(float mix, FilterSection filterToApply)
+{
+    std::cout << "Filtering applied with " << filterToApply.filterName << " with " << mix << " ammount\n";
+    return true;
+}
+
+void SynthApplication::modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
+                                                        OscillatorSection targetOscillator,
+                                                        float modulationDepth)
+{
+    modulatingOscillator.setName("Modulating Osc");
+    targetOscillator.setName("Target Osc");
+    std::cout << "Applied modulation to " << targetOscillator.oscName
+              << " with " << modulatingOscillator.oscName << " by "
+              << modulationDepth << " amount\n";
+}
 //============================================================
 int main()
 { 
