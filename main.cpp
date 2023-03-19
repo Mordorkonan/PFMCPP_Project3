@@ -161,7 +161,8 @@ void AirConditioner::startCooling(float targetTemperature, char timer)
 void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
 {
     std::cout << "Activated humidity decrescent to " << targetRelativeHumidity << std::endl;
-    std::cout << "Temperature changed from distance of " << (int) remoteDistance / 2 << " meters" << std::endl;
+    if (remoteDistance == 20)
+        std::cout << "Warning. Remote is being used at max distance" << std::endl;
 }
 
 struct Headphones
@@ -192,7 +193,7 @@ struct Headphones
     float changeEarcupPosition(char position); // returns a dimension from top to the earcup
     void imitateSurround(bool isSurround = false);
 
-    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
+    void changeMicrophoneInputGain(Microphone connectedMicrophone, float targetGain);
     void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
     std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
 
@@ -255,7 +256,7 @@ void Headphones::imitateSurround(bool isSurround)
     else
         std::cout << "Surround imitation disabled\n";
 
-        std::cout << "Warning. Surround imitation might have a malfunction with " << impedance << " Ohm\n";
+    std::cout << "Warning. Surround imitation might have a malfunction with " << impedance << " Ohm\n";
 }
 
 struct WashingMachine
@@ -335,9 +336,9 @@ void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, 
 void EnvelopSection::applyAttackConvex(float convexIntensity)
 {
     std::cout << "Attack convex changed to " << convexIntensity << std::endl;
-    if (convexIntensity < 0)
+    if (convexIntensity < 0.0f)
         std::cout << "Attack is convexed below linear function" << std::endl;
-    else if (convexIntensity == 0)
+    else if (convexIntensity == 0.0f)
         std::cout << "Attack is linear" << std::endl;
     else
         std::cout << "Attack is concaved above linear function" << std::endl;
@@ -354,6 +355,7 @@ float EnvelopSection::getTotalSignalDuration(float attack, float hold, float rel
 struct OscillatorSection
 {
     OscillatorSection();
+    OscillatorSection(std::string);
 
     struct Waveform
     {
@@ -385,6 +387,11 @@ struct OscillatorSection
 OscillatorSection::OscillatorSection()
 {
     std::cout << "OscillatorSection constructor launched" << std::endl;
+}
+
+OscillatorSection::OscillatorSection(std::string explicitOscName) // overloaded constructor
+{
+    oscName = explicitOscName;
 }
 
 OscillatorSection::Waveform::Waveform()
@@ -635,7 +642,87 @@ void SynthApplication::modulateOneOscillatorWithAnother(OscillatorSection modula
 int main()
 { 
     Example::main();
+    std::cout << "\n";
     
+    Phone myPhone;
+    AirConditioner bosch;
+    Headphones sennheiserHDxxx;
+    Headphones::Microphone neumannRandomMike;
+    WashingMachine LG;
+    OscillatorSection sawOsc("Saw Osc"), trisineOsc("trisine Osc");
+    OscillatorSection::Waveform saw, square;
+    EnvelopSection env1, env2;
+    FilterSection negativeComb;
+    FXSection multiFX;
+    LFOSection basicTriangle;
+    SynthApplication testSynth;
+    std::cout << "\n";
+    
+    myPhone.capturePhoto(true);
+    myPhone.recieveCalls(911);
+    myPhone.showMessage(911, true);
+    std::cout << "\n";
+
+    bosch.decreaseHumidity(25);
+    bosch.startCooling(27.7f, 3);
+    bosch.turnOffAutomatically(6);
+    std::cout << "\n";
+
+    sennheiserHDxxx.changeEarcupPosition(2);
+    sennheiserHDxxx.imitateSurround(true);
+    sennheiserHDxxx.startPlayingSound(0.69f);
+
+    // functions with absent implementations according to project 3.2 instructions:
+    // sennheiserHDxxx.changeMicrophoneInputGain(neumannRandomMike, 0.75f);
+    // sennheiserHDxxx.decreaseInputSensitivityOnClipping(neumannRandomMike);
+    // sennheiserHDxxx.getConnectedMicrophoneID(neumannRandomMike, true);
+    std::cout << "\n";
+
+    neumannRandomMike.getState(true);
+    neumannRandomMike.setState(true);
+    neumannRandomMike.trackInputLevel(false, true);
+    std::cout << "\n";
+    
+    LG.changeWashingModeAutomatically("Accurate", "Agressive", 25);
+    LG.changeWater(5, true, false);
+    LG.washClothes(43.3f, 15);
+    std::cout << "\n";
+
+    sawOsc.getKeyTrackState(saw);
+    sawOsc.getWaveformName(saw);
+    sawOsc.setName("Hypersaw");
+    sawOsc.trackPhase(saw);
+    std::cout << "\n";
+
+    saw.fillEntireWaveTable(1);
+    square.useFadeIn(0.11f);
+    saw.invertPhase(-60);
+    std::cout << "\n";
+
+    env1.drawEnvelopGraphics(1.1f, 2.2f, 3.3f, 4.4f, 5.5f);
+    env2.applyAttackConvex(-0.5f);
+    env2.getTotalSignalDuration(5.5f, 2.2f, 5.5f/*, true*/);
+    std::cout << "\n";
+
+    negativeComb.flipHorizontally(-0.2f);
+    negativeComb.getFilteringAlgorithm(/*false*/);
+    negativeComb.setParametricQuality(0.88f);
+    std::cout << "\n";
+
+    multiFX.applyLowCutPreFiltering(130.0f, 2.5f);
+    multiFX.returnRT60Time(0.75f, 6.5f);
+    multiFX.setMixKnobExponential(2.1f);
+    std::cout << "\n";
+
+    basicTriangle.flipVertically(true);
+    basicTriangle.isConcavityGrouped(/*false*/);
+    basicTriangle.toggleGridSnapping(true, false);
+    std::cout << "\n";
+
+    testSynth.applyFiltration(0.4f, negativeComb);
+    testSynth.modulateOneOscillatorWithAnother(sawOsc, trisineOsc, 0.32f);
+    testSynth.toggleFXElement(multiFX);
+    std::cout << "\n";
     
     std::cout << "good to go!" << std::endl; 
 }
