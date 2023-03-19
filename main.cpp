@@ -78,6 +78,8 @@ paste your code below
 */
 struct Phone
 {
+    Phone();
+
     int memoryAmount = 128;
     char numberOfCPUCores = 4;
     float screenSize = 5.8f;
@@ -88,11 +90,17 @@ struct Phone
     void capturePhoto(bool frontCamera = false);
     std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
 };
-
+// ================================================================================
+Phone::Phone()
+{
+    std::cout << "Phone constructor launched" << std::endl;
+}
+// ================================================================================
 void Phone::recieveCalls(int number)
 {
     std::cout << "Function 'recieveCalls()' has been called\n"
               << "Incoming call from " << number << std::endl;
+    std::cout << "Device volume: " << screenSize * thickness << std::endl;
 }
 
 void Phone::capturePhoto(bool frontCamera)
@@ -119,6 +127,8 @@ std::string Phone::showMessage(int number, bool appendSenderName)
 
 struct AirConditioner
 {
+    AirConditioner();
+
     float price = 1.95f;
     int screenWidth = 10;
     short remoteDistance = 20;
@@ -129,7 +139,12 @@ struct AirConditioner
     void startCooling(float targetTemperature, char timer = 0);
     void decreaseHumidity(short targetRelativeHumidity);
 };
-
+// ================================================================================
+AirConditioner::AirConditioner()
+{
+    std::cout << "AirConditioner constructor launched" << std::endl;
+}
+// ================================================================================
 bool AirConditioner::turnOffAutomatically(char timer)
 {
     if (timer > 0) return true;
@@ -146,12 +161,18 @@ void AirConditioner::startCooling(float targetTemperature, char timer)
 void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
 {
     std::cout << "Activated humidity decrescent to " << targetRelativeHumidity << std::endl;
+    if (remoteDistance == 20)
+        std::cout << "Warning. Remote is being used at max distance" << std::endl;
 }
 
 struct Headphones
 {
+    Headphones();
+
     struct Microphone
     {
+        Microphone();
+
         float inputGain = 0.25f;
         bool flexibleConstruction = false;
         bool EnablementState = true;
@@ -172,13 +193,23 @@ struct Headphones
     float changeEarcupPosition(char position); // returns a dimension from top to the earcup
     void imitateSurround(bool isSurround = false);
 
-    void changeMicrophoneImputGain(Microphone connectedMicrophone, float targetGain);
+    void changeMicrophoneInputGain(Microphone connectedMicrophone, float targetGain);
     void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
     std::string getConnectedMicrophoneID(Microphone connectedMicrophone, bool withHeadphonesIDAppended = false);
 
     Microphone mike;
 };
+// ================================================================================
+Headphones::Headphones()
+{
+    std::cout << "Headphones constructor launched" << std::endl;
+}
 
+Headphones::Microphone::Microphone()
+{
+    std::cout << "Headphones::Microphone constructor launched" << std::endl;
+}
+// ================================================================================
 void Headphones::Microphone::setState(bool state)
 {
     std::cout << "Microphone state changed to " << state << std::endl;
@@ -187,7 +218,12 @@ void Headphones::Microphone::setState(bool state)
 bool Headphones::Microphone::getState(bool toggleStateOnRequest)
 {
     if (toggleStateOnRequest)
+    {
         currentState = !currentState;
+        std::cout << "Mike's state has been changed on state request\n";        
+    }
+    else
+        std::cout << "Mike's state stayed the same\n";  
     return currentState;
 }
 
@@ -219,10 +255,14 @@ void Headphones::imitateSurround(bool isSurround)
         std::cout << "Surround imitation enabled\n";
     else
         std::cout << "Surround imitation disabled\n";
+
+    std::cout << "Warning. Surround imitation might have a malfunction with " << impedance << " Ohm\n";
 }
 
 struct WashingMachine
 {
+    WashingMachine();
+
     float volume = 6.0f;
     float rpm = 75.0f;
     int powerSupplyVoltage = 220;
@@ -233,7 +273,12 @@ struct WashingMachine
     float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
     void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
 };
-
+// ================================================================================
+WashingMachine::WashingMachine()
+{
+    std::cout << "WashingMachine constructor launched" << std::endl;
+}
+// ================================================================================
 bool WashingMachine::changeWater(char timer, bool checkTemperatureBeforeChange, bool changeDuringWorkflow)
 {
     std::cout << "The water will be changed in " << timer << " minutes\n";
@@ -249,6 +294,7 @@ float WashingMachine::washClothes(float waterTemperature, int timer)
 {
     if (timer > 0)
         std::cout << "The machine will stop in " << timer << " minutes\n";
+    std::cout << "Current water temperature is " << waterTemperature << std::endl;
     return waterTemperature;
 }
 
@@ -259,6 +305,8 @@ void WashingMachine::changeWashingModeAutomatically(std::string currentMode, std
 
 struct EnvelopSection
 {
+    EnvelopSection();
+
     float attackTime = 0.1f;
     float holdTime = 0.1f;
     float decayMagnitude = 0.75f;
@@ -269,7 +317,12 @@ struct EnvelopSection
     void applyAttackConvex(float convexIntensity);
     float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
 };
-
+// ================================================================================
+EnvelopSection::EnvelopSection()
+{
+    std::cout << "EnvelopSection constructor launched" << std::endl;
+}
+// ================================================================================
 void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, float sustain, float release)
 {
     std::cout << "Envelop drawn with next parameters:\n"
@@ -283,6 +336,13 @@ void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, 
 void EnvelopSection::applyAttackConvex(float convexIntensity)
 {
     std::cout << "Attack convex changed to " << convexIntensity << std::endl;
+    if (convexIntensity < 0.0f)
+        std::cout << "Attack is convexed below linear function" << std::endl;
+    else if (convexIntensity == 0.0f)
+        std::cout << "Attack is linear" << std::endl;
+    else
+        std::cout << "Attack is concaved above linear function" << std::endl;
+        
 }
 
 float EnvelopSection::getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds)
@@ -294,8 +354,13 @@ float EnvelopSection::getTotalSignalDuration(float attack, float hold, float rel
 
 struct OscillatorSection
 {
+    OscillatorSection();
+    OscillatorSection(std::string);
+
     struct Waveform
     {
+        Waveform();
+
         std::string waveformName = "sine";
         bool keyTrack = true;
         int initialPhase = 180;
@@ -318,12 +383,29 @@ struct OscillatorSection
 
     Waveform sine;
 };
+// ================================================================================
+OscillatorSection::OscillatorSection()
+{
+    std::cout << "OscillatorSection constructor launched" << std::endl;
+}
 
+OscillatorSection::OscillatorSection(std::string explicitOscName) // overloaded constructor
+{
+    oscName = explicitOscName;
+}
+
+OscillatorSection::Waveform::Waveform()
+{
+    std::cout << "OscillatorSection::Waveform constructor launched" << std::endl;
+}
+// ================================================================================
 void OscillatorSection::Waveform::invertPhase(int phase)
 {
+    int tempPhase = phase;
     if (phase < 0) phase += 180;
     else phase -= 180;
     std::cout << "Phase inverted";
+    std::cout << "Previous phase " << tempPhase << " has been inverted to " << phase << std::endl;
 }
 
 void OscillatorSection::Waveform::useFadeIn(float fadeInDuration)
@@ -356,11 +438,15 @@ void OscillatorSection::trackPhase(Waveform targetWaveform)
 
 void OscillatorSection::setName(std::string newOscName)
 {
+    std::string tempOscName = oscName;
     oscName = newOscName;
+    std::cout << "Previous oscillator name " << tempOscName << " has been changed to " << oscName << std::endl;
 }
 
 struct FilterSection
 {
+    FilterSection();
+
     std::string filterName = "Basic Filter";
     float cutFrequency = 15000.0f;
     float qualityFactor = 1.0f;
@@ -372,7 +458,12 @@ struct FilterSection
     void setParametricQuality(float coefficientOfQualityAndGainInteraction);
     void flipHorizontally(float pivotFrequencyOffset);
 };
-
+// ================================================================================
+FilterSection::FilterSection()
+{
+    std::cout << "FilterSection constructor launched" << std::endl;
+}
+// ================================================================================
 std::string FilterSection::getFilteringAlgorithm(bool considerMixAmount)
 {
     std::string algorithmLine = "Filter Algorithm is normal";
@@ -384,6 +475,7 @@ std::string FilterSection::getFilteringAlgorithm(bool considerMixAmount)
 void FilterSection::setParametricQuality(float coefficientOfQualityAndGainInteraction)
 {
     std::cout << "Quality is now bound to Gain with " << coefficientOfQualityAndGainInteraction << std::endl;
+    std::cout << "Quality factor is " << qualityFactor << " combined with " << gain << " gain\n";
 }
 
 void FilterSection::flipHorizontally(float pivotFrequencyOffset)
@@ -392,7 +484,9 @@ void FilterSection::flipHorizontally(float pivotFrequencyOffset)
 }
 
 struct FXSection
-{    
+{
+    FXSection();
+
     std::string FXname = "BasicFX";
     float distortionAmount = 0.5f;
     float delayTime = 0.25f;
@@ -404,7 +498,12 @@ struct FXSection
     float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
     void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
 };
-
+// ================================================================================
+FXSection::FXSection()
+{
+    std::cout << "FXSection constructor launched" << std::endl;
+}
+// ================================================================================
 void FXSection::applyLowCutPreFiltering(float lowCutFrequency, float resonance)
 {
     std::cout << "Filtering applied with next parameters:\n"
@@ -420,11 +519,14 @@ float FXSection::returnRT60Time(float decayTime, float reverbSize)
 
 void FXSection::setMixKnobExponential(float additionalExponentialCoefficient)
 {
-    std::cout << "Mix knob is now exponential with coefficient " << additionalExponentialCoefficient << std::endl;
+    std::cout << "Mix knob is now exponential with coefficient " << additionalExponentialCoefficient
+              << "\nCurrent mix amount is " << mix << std::endl;
 }
 
 struct LFOSection
 {
+    LFOSection();
+
     char amountOfEnvelopPoints = 3;
     char curveFormIndex = 1;
     bool gridSnapping = false;
@@ -435,7 +537,12 @@ struct LFOSection
     bool isConcavityGrouped(bool considerOnlySelectedSegments = false); // returns true if concavity is being edited for all segments simultaneously
     void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
 };
-
+// ================================================================================
+LFOSection::LFOSection()
+{
+    std::cout << "LFOSection constructor launched" << std::endl;
+}
+// ================================================================================
 void LFOSection::flipVertically(bool considerAutomationBipolarity)
 {
     std::string flipLine = "LFO flipped";
@@ -448,7 +555,9 @@ bool LFOSection::isConcavityGrouped(bool considerOnlySelectedSegments)
 {
     if (considerOnlySelectedSegments)
         std::cout << "considering selected segments\n";
-    bool isGrouped = false; // supposed to get state from algorithm of group checking 
+    bool isGrouped = false; // supposed to get state from algorithm of group checking
+    std::cout << "Curve form index is " << curveFormIndex
+              << " including " << stereoSpreader << " stereo spreading" << std::endl;
     return isGrouped;
 }
 
@@ -485,6 +594,8 @@ void LFOSection::toggleGridSnapping(bool applyOnlyForEnabledState, bool applyOnl
 
 struct SynthApplication
 {
+    SynthApplication();
+
     EnvelopSection envelope;
     OscillatorSection oscillator;
     FilterSection filter;
@@ -497,7 +608,12 @@ struct SynthApplication
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
 };
-
+// ================================================================================
+SynthApplication::SynthApplication()
+{
+    std::cout << "SynthApplication constructor launched" << std::endl;
+}
+// ================================================================================
 void SynthApplication::toggleFXElement(FXSection elementToToggle)
 {
     std::cout << "Element " << elementToToggle.FXname << " toggled\n";
@@ -518,12 +634,95 @@ void SynthApplication::modulateOneOscillatorWithAnother(OscillatorSection modula
     std::cout << "Applied modulation to " << targetOscillator.oscName
               << " with " << modulatingOscillator.oscName << " by "
               << modulationDepth << " amount\n";
+    if (modulatingOscillator.amountOfVoices > 1)
+        std::cout << "Warning. Modulating oscillator " << modulatingOscillator.oscName
+                  << " has more than 1 voice, what may cause high CPU usage\n";
 }
 //============================================================
 int main()
 { 
     Example::main();
+    std::cout << "\n";
     
+    Phone myPhone;
+    AirConditioner bosch;
+    Headphones sennheiserHDxxx;
+    Headphones::Microphone neumannRandomMike;
+    WashingMachine LG;
+    OscillatorSection sawOsc("Saw Osc"), trisineOsc("trisine Osc");
+    OscillatorSection::Waveform saw, square;
+    EnvelopSection env1, env2;
+    FilterSection negativeComb;
+    FXSection multiFX;
+    LFOSection basicTriangle;
+    SynthApplication testSynth;
+    std::cout << "\n";
+    
+    myPhone.capturePhoto(true);
+    myPhone.recieveCalls(911);
+    myPhone.showMessage(911, true);
+    std::cout << "\n";
+
+    bosch.decreaseHumidity(25);
+    bosch.startCooling(27.7f, 3);
+    bosch.turnOffAutomatically(6);
+    std::cout << "\n";
+
+    sennheiserHDxxx.changeEarcupPosition(2);
+    sennheiserHDxxx.imitateSurround(true);
+    sennheiserHDxxx.startPlayingSound(0.69f);
+
+    // functions with absent implementations according to project 3.2 instructions:
+    // sennheiserHDxxx.changeMicrophoneInputGain(neumannRandomMike, 0.75f);
+    // sennheiserHDxxx.decreaseInputSensitivityOnClipping(neumannRandomMike);
+    // sennheiserHDxxx.getConnectedMicrophoneID(neumannRandomMike, true);
+    std::cout << "\n";
+
+    neumannRandomMike.getState(true);
+    neumannRandomMike.setState(true);
+    neumannRandomMike.trackInputLevel(false, true);
+    std::cout << "\n";
+    
+    LG.changeWashingModeAutomatically("Accurate", "Agressive", 25);
+    LG.changeWater(5, true, false);
+    LG.washClothes(43.3f, 15);
+    std::cout << "\n";
+
+    sawOsc.getKeyTrackState(saw);
+    sawOsc.getWaveformName(saw);
+    sawOsc.setName("Hypersaw");
+    sawOsc.trackPhase(saw);
+    std::cout << "\n";
+
+    saw.fillEntireWaveTable(1);
+    square.useFadeIn(0.11f);
+    saw.invertPhase(-60);
+    std::cout << "\n";
+
+    env1.drawEnvelopGraphics(1.1f, 2.2f, 3.3f, 4.4f, 5.5f);
+    env2.applyAttackConvex(-0.5f);
+    env2.getTotalSignalDuration(5.5f, 2.2f, 5.5f/*, true*/);
+    std::cout << "\n";
+
+    negativeComb.flipHorizontally(-0.2f);
+    negativeComb.getFilteringAlgorithm(/*false*/);
+    negativeComb.setParametricQuality(0.88f);
+    std::cout << "\n";
+
+    multiFX.applyLowCutPreFiltering(130.0f, 2.5f);
+    multiFX.returnRT60Time(0.75f, 6.5f);
+    multiFX.setMixKnobExponential(2.1f);
+    std::cout << "\n";
+
+    basicTriangle.flipVertically(true);
+    basicTriangle.isConcavityGrouped(/*false*/);
+    basicTriangle.toggleGridSnapping(true, false);
+    std::cout << "\n";
+
+    testSynth.applyFiltration(0.4f, negativeComb);
+    testSynth.modulateOneOscillatorWithAnother(sawOsc, trisineOsc, 0.32f);
+    testSynth.toggleFXElement(multiFX);
+    std::cout << "\n";
     
     std::cout << "good to go!" << std::endl; 
 }
