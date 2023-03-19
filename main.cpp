@@ -100,6 +100,7 @@ void Phone::recieveCalls(int number)
 {
     std::cout << "Function 'recieveCalls()' has been called\n"
               << "Incoming call from " << number << std::endl;
+    std::cout << "Device volume: " << screenSize * thickness << std::endl;
 }
 
 void Phone::capturePhoto(bool frontCamera)
@@ -160,6 +161,7 @@ void AirConditioner::startCooling(float targetTemperature, char timer)
 void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
 {
     std::cout << "Activated humidity decrescent to " << targetRelativeHumidity << std::endl;
+    std::cout << "Temperature changed from distance of " << (int) remoteDistance / 2 << " meters" << std::endl;
 }
 
 struct Headphones
@@ -215,7 +217,12 @@ void Headphones::Microphone::setState(bool state)
 bool Headphones::Microphone::getState(bool toggleStateOnRequest)
 {
     if (toggleStateOnRequest)
+    {
         currentState = !currentState;
+        std::cout << "Mike's state has been changed on state request\n";        
+    }
+    else
+        std::cout << "Mike's state stayed the same\n";  
     return currentState;
 }
 
@@ -247,6 +254,8 @@ void Headphones::imitateSurround(bool isSurround)
         std::cout << "Surround imitation enabled\n";
     else
         std::cout << "Surround imitation disabled\n";
+
+        std::cout << "Warning. Surround imitation might have a malfunction with " << impedance << " Ohm\n";
 }
 
 struct WashingMachine
@@ -284,6 +293,7 @@ float WashingMachine::washClothes(float waterTemperature, int timer)
 {
     if (timer > 0)
         std::cout << "The machine will stop in " << timer << " minutes\n";
+    std::cout << "Current water temperature is " << waterTemperature << std::endl;
     return waterTemperature;
 }
 
@@ -325,6 +335,13 @@ void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, 
 void EnvelopSection::applyAttackConvex(float convexIntensity)
 {
     std::cout << "Attack convex changed to " << convexIntensity << std::endl;
+    if (convexIntensity < 0)
+        std::cout << "Attack is convexed below linear function" << std::endl;
+    else if (convexIntensity == 0)
+        std::cout << "Attack is linear" << std::endl;
+    else
+        std::cout << "Attack is concaved above linear function" << std::endl;
+        
 }
 
 float EnvelopSection::getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds)
@@ -377,9 +394,11 @@ OscillatorSection::Waveform::Waveform()
 // ================================================================================
 void OscillatorSection::Waveform::invertPhase(int phase)
 {
+    int tempPhase = phase;
     if (phase < 0) phase += 180;
     else phase -= 180;
     std::cout << "Phase inverted";
+    std::cout << "Previous phase " << tempPhase << " has been inverted to " << phase << std::endl;
 }
 
 void OscillatorSection::Waveform::useFadeIn(float fadeInDuration)
@@ -412,7 +431,9 @@ void OscillatorSection::trackPhase(Waveform targetWaveform)
 
 void OscillatorSection::setName(std::string newOscName)
 {
+    std::string tempOscName = oscName;
     oscName = newOscName;
+    std::cout << "Previous oscillator name " << tempOscName << " has been changed to " << oscName << std::endl;
 }
 
 struct FilterSection
@@ -447,6 +468,7 @@ std::string FilterSection::getFilteringAlgorithm(bool considerMixAmount)
 void FilterSection::setParametricQuality(float coefficientOfQualityAndGainInteraction)
 {
     std::cout << "Quality is now bound to Gain with " << coefficientOfQualityAndGainInteraction << std::endl;
+    std::cout << "Quality factor is " << qualityFactor << " combined with " << gain << " gain\n";
 }
 
 void FilterSection::flipHorizontally(float pivotFrequencyOffset)
@@ -490,7 +512,8 @@ float FXSection::returnRT60Time(float decayTime, float reverbSize)
 
 void FXSection::setMixKnobExponential(float additionalExponentialCoefficient)
 {
-    std::cout << "Mix knob is now exponential with coefficient " << additionalExponentialCoefficient << std::endl;
+    std::cout << "Mix knob is now exponential with coefficient " << additionalExponentialCoefficient
+              << "\nCurrent mix amount is " << mix << std::endl;
 }
 
 struct LFOSection
@@ -525,7 +548,9 @@ bool LFOSection::isConcavityGrouped(bool considerOnlySelectedSegments)
 {
     if (considerOnlySelectedSegments)
         std::cout << "considering selected segments\n";
-    bool isGrouped = false; // supposed to get state from algorithm of group checking 
+    bool isGrouped = false; // supposed to get state from algorithm of group checking
+    std::cout << "Curve form index is " << curveFormIndex
+              << " including " << stereoSpreader << " stereo spreading" << std::endl;
     return isGrouped;
 }
 
@@ -602,6 +627,9 @@ void SynthApplication::modulateOneOscillatorWithAnother(OscillatorSection modula
     std::cout << "Applied modulation to " << targetOscillator.oscName
               << " with " << modulatingOscillator.oscName << " by "
               << modulationDepth << " amount\n";
+    if (modulatingOscillator.amountOfVoices > 1)
+        std::cout << "Warning. Modulating oscillator " << modulatingOscillator.oscName
+                  << " has more than 1 voice, what may cause high CPU usage\n";
 }
 //============================================================
 int main()
