@@ -78,6 +78,8 @@ paste your code below
 */
 struct Phone
 {
+    Phone();
+
     int memoryAmount = 128;
     char numberOfCPUCores = 4;
     float screenSize = 5.8f;
@@ -88,7 +90,12 @@ struct Phone
     void capturePhoto(bool frontCamera = false);
     std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
 };
-
+// ================================================================================
+Phone::Phone()
+{
+    std::cout << "Phone constructor launched" << std::endl;
+}
+// ================================================================================
 void Phone::recieveCalls(int number)
 {
     std::cout << "Function 'recieveCalls()' has been called\n"
@@ -119,6 +126,8 @@ std::string Phone::showMessage(int number, bool appendSenderName)
 
 struct AirConditioner
 {
+    AirConditioner();
+
     float price = 1.95f;
     int screenWidth = 10;
     short remoteDistance = 20;
@@ -129,7 +138,12 @@ struct AirConditioner
     void startCooling(float targetTemperature, char timer = 0);
     void decreaseHumidity(short targetRelativeHumidity);
 };
-
+// ================================================================================
+AirConditioner::AirConditioner()
+{
+    std::cout << "AirConditioner constructor launched" << std::endl;
+}
+// ================================================================================
 bool AirConditioner::turnOffAutomatically(char timer)
 {
     if (timer > 0) return true;
@@ -150,8 +164,12 @@ void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
 
 struct Headphones
 {
+    Headphones();
+
     struct Microphone
     {
+        Microphone();
+
         float inputGain = 0.25f;
         bool flexibleConstruction = false;
         bool EnablementState = true;
@@ -178,7 +196,17 @@ struct Headphones
 
     Microphone mike;
 };
+// ================================================================================
+Headphones::Headphones()
+{
+    std::cout << "Headphones constructor launched" << std::endl;
+}
 
+Headphones::Microphone::Microphone()
+{
+    std::cout << "Headphones::Microphone constructor launched" << std::endl;
+}
+// ================================================================================
 void Headphones::Microphone::setState(bool state)
 {
     std::cout << "Microphone state changed to " << state << std::endl;
@@ -223,6 +251,8 @@ void Headphones::imitateSurround(bool isSurround)
 
 struct WashingMachine
 {
+    WashingMachine();
+
     float volume = 6.0f;
     float rpm = 75.0f;
     int powerSupplyVoltage = 220;
@@ -233,7 +263,12 @@ struct WashingMachine
     float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
     void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
 };
-
+// ================================================================================
+WashingMachine::WashingMachine()
+{
+    std::cout << "WashingMachine constructor launched" << std::endl;
+}
+// ================================================================================
 bool WashingMachine::changeWater(char timer, bool checkTemperatureBeforeChange, bool changeDuringWorkflow)
 {
     std::cout << "The water will be changed in " << timer << " minutes\n";
@@ -259,6 +294,8 @@ void WashingMachine::changeWashingModeAutomatically(std::string currentMode, std
 
 struct EnvelopSection
 {
+    EnvelopSection();
+
     float attackTime = 0.1f;
     float holdTime = 0.1f;
     float decayMagnitude = 0.75f;
@@ -269,7 +306,12 @@ struct EnvelopSection
     void applyAttackConvex(float convexIntensity);
     float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
 };
-
+// ================================================================================
+EnvelopSection::EnvelopSection()
+{
+    std::cout << "EnvelopSection constructor launched" << std::endl;
+}
+// ================================================================================
 void EnvelopSection::drawEnvelopGraphics(float attack, float hold, float decay, float sustain, float release)
 {
     std::cout << "Envelop drawn with next parameters:\n"
@@ -294,8 +336,12 @@ float EnvelopSection::getTotalSignalDuration(float attack, float hold, float rel
 
 struct OscillatorSection
 {
+    OscillatorSection();
+
     struct Waveform
     {
+        Waveform();
+
         std::string waveformName = "sine";
         bool keyTrack = true;
         int initialPhase = 180;
@@ -318,7 +364,17 @@ struct OscillatorSection
 
     Waveform sine;
 };
+// ================================================================================
+OscillatorSection::OscillatorSection()
+{
+    std::cout << "OscillatorSection constructor launched" << std::endl;
+}
 
+OscillatorSection::Waveform::Waveform()
+{
+    std::cout << "OscillatorSection::Waveform constructor launched" << std::endl;
+}
+// ================================================================================
 void OscillatorSection::Waveform::invertPhase(int phase)
 {
     if (phase < 0) phase += 180;
@@ -361,6 +417,8 @@ void OscillatorSection::setName(std::string newOscName)
 
 struct FilterSection
 {
+    FilterSection();
+
     std::string filterName = "Basic Filter";
     float cutFrequency = 15000.0f;
     float qualityFactor = 1.0f;
@@ -372,7 +430,12 @@ struct FilterSection
     void setParametricQuality(float coefficientOfQualityAndGainInteraction);
     void flipHorizontally(float pivotFrequencyOffset);
 };
-
+// ================================================================================
+FilterSection::FilterSection()
+{
+    std::cout << "FilterSection constructor launched" << std::endl;
+}
+// ================================================================================
 std::string FilterSection::getFilteringAlgorithm(bool considerMixAmount)
 {
     std::string algorithmLine = "Filter Algorithm is normal";
@@ -392,7 +455,9 @@ void FilterSection::flipHorizontally(float pivotFrequencyOffset)
 }
 
 struct FXSection
-{    
+{
+    FXSection();
+
     std::string FXname = "BasicFX";
     float distortionAmount = 0.5f;
     float delayTime = 0.25f;
@@ -404,7 +469,12 @@ struct FXSection
     float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
     void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
 };
-
+// ================================================================================
+FXSection::FXSection()
+{
+    std::cout << "FXSection constructor launched" << std::endl;
+}
+// ================================================================================
 void FXSection::applyLowCutPreFiltering(float lowCutFrequency, float resonance)
 {
     std::cout << "Filtering applied with next parameters:\n"
@@ -425,6 +495,8 @@ void FXSection::setMixKnobExponential(float additionalExponentialCoefficient)
 
 struct LFOSection
 {
+    LFOSection();
+
     char amountOfEnvelopPoints = 3;
     char curveFormIndex = 1;
     bool gridSnapping = false;
@@ -435,7 +507,12 @@ struct LFOSection
     bool isConcavityGrouped(bool considerOnlySelectedSegments = false); // returns true if concavity is being edited for all segments simultaneously
     void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
 };
-
+// ================================================================================
+LFOSection::LFOSection()
+{
+    std::cout << "LFOSection constructor launched" << std::endl;
+}
+// ================================================================================
 void LFOSection::flipVertically(bool considerAutomationBipolarity)
 {
     std::string flipLine = "LFO flipped";
@@ -485,6 +562,8 @@ void LFOSection::toggleGridSnapping(bool applyOnlyForEnabledState, bool applyOnl
 
 struct SynthApplication
 {
+    SynthApplication();
+
     EnvelopSection envelope;
     OscillatorSection oscillator;
     FilterSection filter;
@@ -497,7 +576,12 @@ struct SynthApplication
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
 };
-
+// ================================================================================
+SynthApplication::SynthApplication()
+{
+    std::cout << "SynthApplication constructor launched" << std::endl;
+}
+// ================================================================================
 void SynthApplication::toggleFXElement(FXSection elementToToggle)
 {
     std::cout << "Element " << elementToToggle.FXname << " toggled\n";
