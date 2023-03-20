@@ -441,6 +441,10 @@ OscillatorSection::OscillatorSection() : waveformIndex(0), amountOfVoices(1)
 OscillatorSection::OscillatorSection(std::string explicitOscName) : waveformIndex(0), amountOfVoices(1) // overloaded constructor
 {
     oscName = explicitOscName;
+    std::cout << "OscillatorSection OVERLOADED constructor launched" << std::endl;
+    std::cout << "\n";
+    displayInitState();
+    std::cout << "\n";
 }
 
 OscillatorSection::Waveform::Waveform() : keyTrack(false)
