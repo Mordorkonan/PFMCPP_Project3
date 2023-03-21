@@ -58,7 +58,7 @@ struct Phone
     void displayInitState();
 };
 // ================================================================================
-Phone::Phone() : numberOfCPUCores(4), cameraResolution(20.5f)
+Phone::Phone() : numberOfCPUCores('4'), cameraResolution(20.5f)
 {
     std::cout << "Phone constructor launched" << std::endl;
     std::cout << "\n";
@@ -194,7 +194,7 @@ struct Headphones
     Microphone mike;
 };
 // ================================================================================
-Headphones::Headphones() : wireLength(3), isClosed(false)
+Headphones::Headphones() : wireLength('3'), isClosed(false)
 {
     std::cout << "Headphones constructor launched" << std::endl;
     std::cout << "\n";
@@ -390,7 +390,7 @@ float EnvelopSection::getTotalSignalDuration(float attack, float hold, float rel
 void EnvelopSection::displayInitState()
 {
     std::cout << "Attack Time = " << attackTime << std::endl
-              << "Hold Time" << holdTime << std::endl
+              << "Hold Time = " << holdTime << std::endl
               << "Decay magnitute = " << decayMagnitude << std::endl
               << "Sustain magnitude = " << sustainMagnitude << std::endl
               << "Release time = " << releaseTime << std::endl;
@@ -430,7 +430,7 @@ struct OscillatorSection
     Waveform sine;
 };
 // ================================================================================
-OscillatorSection::OscillatorSection() : waveformIndex(0), amountOfVoices(1)
+OscillatorSection::OscillatorSection() : waveformIndex('0'), amountOfVoices(1)
 {
     std::cout << "OscillatorSection constructor launched" << std::endl;
     std::cout << "\n";
@@ -438,7 +438,7 @@ OscillatorSection::OscillatorSection() : waveformIndex(0), amountOfVoices(1)
     std::cout << "\n";
 }
 
-OscillatorSection::OscillatorSection(std::string explicitOscName) : waveformIndex(0), amountOfVoices(1) // overloaded constructor
+OscillatorSection::OscillatorSection(std::string explicitOscName) : waveformIndex('0'), amountOfVoices(1) // overloaded constructor
 {
     oscName = explicitOscName;
     std::cout << "OscillatorSection OVERLOADED constructor launched" << std::endl;
@@ -524,7 +524,7 @@ struct FilterSection
     float qualityFactor = 1.0f;
     float gain;
     float mix;
-    char combPatternIndex { 0 };
+    char combPatternIndex { '0' };
 
     std::string getFilteringAlgorithm(bool considerMixAmount = false); // returns algorithm of filtering
     void setParametricQuality(float coefficientOfQualityAndGainInteraction);
@@ -629,8 +629,8 @@ struct LFOSection
 {
     LFOSection();
 
-    char amountOfEnvelopPoints = 3;
-    char curveFormIndex = 1;
+    char amountOfEnvelopPoints = '3';
+    char curveFormIndex = '1';
     bool gridSnapping;
     int stereoSpreader = 100;
     char triggerModeIndex;
@@ -643,7 +643,7 @@ struct LFOSection
 // ================================================================================
 LFOSection::LFOSection() : stereoSpreader(100)
 {
-    triggerModeIndex = 1;
+    triggerModeIndex = '1';
     gridSnapping = false;
     std::cout << "LFOSection constructor launched" << std::endl;
     std::cout << "\n";
