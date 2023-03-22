@@ -144,16 +144,16 @@ void Phone::recalculateMemory(int memory)
     std::cout << "Doubling memory until it reaches max amount\n";
     
     while (memory < memoryAmount)
-        {
-            ++iterator;
-            memory *= 2;
-            std::cout << "Memory is: " << memory << " of maximum " << memoryAmount << std::endl;
-        }
+    {
+        ++iterator;
+        memory *= 2;
+        std::cout << "Memory is: " << memory << " of maximum " << memoryAmount << std::endl;
+    }
     
     for (int i = 0; i < iterator; ++i)
-        {
-            std::cout << "Calculation applied " << i + 1 << "th time of " << iterator << std::endl;
-        }
+    {
+        std::cout << "Calculation applied " << i + 1 << "th time of " << iterator << std::endl;
+    }
 }
 
 struct AirConditioner
@@ -206,10 +206,10 @@ void AirConditioner::decreaseHumidity(short targetRelativeHumidity, short steps)
     if (steps <= (100 - targetRelativeHumidity) % 10)
     {
         for (short i = 0; i < steps; ++i)
-            {
-                short humidity = (100 - targetRelativeHumidity) - 10 * i;
-                std::cout << "Current humidity is " << humidity << std::endl;
-            }
+        {
+            short humidity = (100 - targetRelativeHumidity) - 10 * i;
+            std::cout << "Current humidity is " << humidity << std::endl;
+        }
     }
     else std::cout << "Error. Too many steps for decrescent\n";
 }
@@ -311,10 +311,10 @@ void Headphones::Microphone::increaseInput(float gain)
         inputGain = gain;
     
     while (inputGain <= 1.0f)
-        {
-            inputGain += 0.1f;
-            std::cout << "Input gain: " << inputGain << std::endl;
-        }
+    {
+        inputGain += 0.1f;
+        std::cout << "Input gain: " << inputGain << std::endl;
+    }
 }
 
 void Headphones::startPlayingSound(float gainCompensation)
@@ -343,9 +343,9 @@ void Headphones::buildImpedanceScale(int imp)
 {
     std::string scale = "";
     for (int i = 0; i < (impedance - imp); ++i)
-        {
-            scale += "#";
-        }
+    {
+        scale += "#";
+    }
     std::cout << "Scale: " << scale << std::endl;
 }
 
@@ -428,10 +428,10 @@ void WashingMachine::displayInitState()
 void WashingMachine::trackRPM(float RPM)
 {
     while (RPM < rpm)
-        {
-            RPM += 1.5f;
-            std::cout << "Current RPM is " << RPM << std::endl;
-        }
+    {
+        RPM += 1.5f;
+        std::cout << "Current RPM is " << RPM << std::endl;
+    }
 }
 
 struct EnvelopSection
@@ -590,10 +590,10 @@ void OscillatorSection::Waveform::fillEntireWaveTable(char transformationTypeInd
 void OscillatorSection::Waveform::shiftPhase(int phase)
 {
     while (initialPhase - phase > 0)
-        {
-            initialPhase -= phase;
-            std::cout << "Phase shifted for " << phase << " degrees\n";
-        }
+    {
+        initialPhase -= phase;
+        std::cout << "Phase shifted for " << phase << " degrees\n";
+    }
 }
 
 std::string OscillatorSection::getWaveformName(Waveform requestedWaveform)
@@ -624,10 +624,10 @@ void OscillatorSection::setName(std::string newOscName)
 void OscillatorSection::automatePan(float targetPan)
 {
     while (pan < targetPan)
-        {
-            pan += 0.1f;
-            std::cout << "Pan is " << pan << std::endl;
-        }
+    {
+        pan += 0.1f;
+        std::cout << "Pan is " << pan << std::endl;
+    }
 }
 
 void OscillatorSection::displayInitState()
@@ -706,10 +706,10 @@ void FilterSection::automateCut(float cutFreq)
     if (cutFreq < cutFrequency)
     {
         while (cutFrequency > cutFreq)
-            {
-                cutFrequency -= 100.0f;
-                std::cout << "Decreasing cut frequency to " << cutFrequency << std::endl;
-            }
+        {
+            cutFrequency -= 100.0f;
+            std::cout << "Decreasing cut frequency to " << cutFrequency << std::endl;
+        }
     }
 }
 
@@ -777,10 +777,10 @@ void FXSection::iterateCompRatio(float ratio)
         std::cout << "initial ratio is " << ratio << std::endl;
         float difference = (compressionRatio - ratio) * 2;
         for (int i = 0; i < static_cast<int>(difference); ++i)
-            {
-                ratio += 0.25f;
-                std::cout << "current ratio is " << ratio << std::endl;
-            }
+        {
+            ratio += 0.25f;
+            std::cout << "current ratio is " << ratio << std::endl;
+        }
     }
 }
 
@@ -873,10 +873,10 @@ void LFOSection::displayInitState()
 void LFOSection::shrinkPan(int stereo)
 {
     while (stereoSpreader > stereo)
-        {
-            stereoSpreader -= 5;
-            std::cout << "Stereo shrinked to " << stereoSpreader << std::endl;
-        }
+    {
+        stereoSpreader -= 5;
+        std::cout << "Stereo shrinked to " << stereoSpreader << std::endl;
+    }
 }
 
 struct SynthApplication
@@ -932,10 +932,10 @@ void SynthApplication::automateFilterQuality(FilterSection filterToAutomate)
 {
     filterToAutomate.qualityFactor = 5.0f;
     while (filter.qualityFactor < filterToAutomate.qualityFactor)
-        {
-            filter.qualityFactor += 0.5f;
-            std::cout << "Quality factor is " << filter.qualityFactor << std::endl;
-        }
+    {
+        filter.qualityFactor += 0.5f;
+        std::cout << "Quality factor is " << filter.qualityFactor << std::endl;
+    }
 }
 //============================================================
 int main()
