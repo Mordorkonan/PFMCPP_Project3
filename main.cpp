@@ -89,6 +89,7 @@ struct Phone
     void capturePhoto(bool frontCamera = false);
     std::string showMessage(int number, bool appendSenderName = false); // returns a message from sender's number
     void displayInitState();
+    void recalculateMemory(int memory);
 };
 // ================================================================================
 Phone::Phone() : numberOfCPUCores('4'), cameraResolution(20.5f)
@@ -137,6 +138,24 @@ void Phone::displayInitState()
               << "Thickness = " << thickness << std::endl;
 }
 
+void Phone::recalculateMemory(int memory)
+{
+    int iterator = 0;
+    std::cout << "Doubling memory until it reaches max amount\n";
+    
+    while (memory < memoryAmount)
+        {
+            ++iterator;
+            memory *= 2;
+            std::cout << "Memory is: " << memory << " of maximum " << memoryAmount << std::endl;
+        }
+    
+    for (int i = 0; i < iterator; ++i)
+        {
+            std::cout << "Calculation applied " << i + 1 << "th time of " << iterator << std::endl;
+        }
+}
+
 struct AirConditioner
 {
     AirConditioner();
@@ -150,6 +169,7 @@ struct AirConditioner
     bool turnOffAutomatically(char timer); // returns True on success
     void startCooling(float targetTemperature, char timer = 0);
     void decreaseHumidity(short targetRelativeHumidity);
+    void decreaseHumidity(short targetRelativeHumidity, short steps);
     void displayInitState();
 };
 // ================================================================================
@@ -181,6 +201,19 @@ void AirConditioner::decreaseHumidity(short targetRelativeHumidity)
         std::cout << "Warning. Remote is being used at max distance" << std::endl;
 }
 
+void AirConditioner::decreaseHumidity(short targetRelativeHumidity, short steps)
+{
+    if (steps <= (100 - targetRelativeHumidity) % 10)
+    {
+        for (short i = 0; i < steps; ++i)
+            {
+                short humidity = (100 - targetRelativeHumidity) - 10 * i;
+                std::cout << "Current humidity is " << humidity << std::endl;
+            }
+    }
+    else std::cout << "Error. Too many steps for decrescent\n";
+}
+
 void AirConditioner::displayInitState()
 {
     std::cout << "Price = " << price << std::endl
@@ -207,6 +240,7 @@ struct Headphones
         bool getState(bool toggleStateOnRequest = false);
         float trackInputLevel(bool useGainToDecibelsTransformation = false, bool strobeLedOnClipping = false);
         void displayInitState();
+        void increaseInput(float gain);
     };
 
     int impedance = 250;
@@ -218,6 +252,7 @@ struct Headphones
     void startPlayingSound(float gainCompensation = 1.0f);
     float changeEarcupPosition(char position); // returns a dimension from top to the earcup
     void imitateSurround(bool isSurround = false);
+    void buildImpedanceScale(int imp);
 
     void changeMicrophoneInputGain(Microphone connectedMicrophone, float targetGain);
     void decreaseInputSensitivityOnClipping(Microphone connectedMicrophone);
@@ -270,6 +305,18 @@ float Headphones::Microphone::trackInputLevel(bool useGainToDecibelsTransformati
     return inputLevel;
 }
 
+void Headphones::Microphone::increaseInput(float gain)
+{
+    if (inputGain < gain)
+        inputGain = gain;
+    
+    while (inputGain <= 1.0f)
+        {
+            inputGain += 0.1f;
+            std::cout << "Input gain: " << inputGain << std::endl;
+        }
+}
+
 void Headphones::startPlayingSound(float gainCompensation)
 {
     float inputLevel = -4.3f * gainCompensation;
@@ -290,6 +337,16 @@ void Headphones::imitateSurround(bool isSurround)
         std::cout << "Surround imitation disabled\n";
 
     std::cout << "Warning. Surround imitation might have a malfunction with " << impedance << " Ohm\n";
+}
+
+void Headphones::buildImpedanceScale(int imp)
+{
+    std::string scale = "";
+    for (int i = 0; i < (impedance - imp); ++i)
+        {
+            scale += "#";
+        }
+    std::cout << "Scale: " << scale << std::endl;
 }
 
 void Headphones::displayInitState()
@@ -323,6 +380,7 @@ struct WashingMachine
     float washClothes(float waterTemperature, int timer = 0); // returns actual time spent
     void changeWashingModeAutomatically(std::string currentMode, std::string targetMode, int timer = 0);
     void displayInitState();
+    void trackRPM(float RPM);
 };
 // ================================================================================
 WashingMachine::WashingMachine() : powerSupplyVoltage(220)
@@ -367,6 +425,15 @@ void WashingMachine::displayInitState()
               << "Brand: " << brand << std::endl;
 }
 
+void WashingMachine::trackRPM(float RPM)
+{
+    while (RPM < rpm)
+        {
+            RPM += 1.5f;
+            std::cout << "Current RPM is " << RPM << std::endl;
+        }
+}
+
 struct EnvelopSection
 {
     EnvelopSection();
@@ -381,6 +448,7 @@ struct EnvelopSection
     void applyAttackConvex(float convexIntensity);
     float getTotalSignalDuration(float attack, float hold, float release, bool limitSustainWithTenSeconds = true);
     void displayInitState();
+    void automateRelease(float release);
 };
 // ================================================================================
 EnvelopSection::EnvelopSection() : decayMagnitude(0.75f), sustainMagnitude(0.25f)
@@ -429,6 +497,16 @@ void EnvelopSection::displayInitState()
               << "Release time = " << releaseTime << std::endl;
 }
 
+void EnvelopSection::automateRelease(float release)
+{
+    if (release > releaseTime)
+    {
+        float difference = release - releaseTime;
+        for (float i = 0; i < difference; i += 0.1f)
+            std::cout << "Reaching target release with " << i * 10 + 1 << "th step\n";
+    }
+}
+
 struct OscillatorSection
 {
     OscillatorSection();
@@ -446,6 +524,7 @@ struct OscillatorSection
         void useFadeIn(float fadeInDuration = 0.01f);
         void fillEntireWaveTable(char transformationTypeIndex = 0);
         void displayInitState();
+        void shiftPhase(int phase);
     };
     std::string oscName = "Basic oscillator";
     char waveformIndex;
@@ -459,6 +538,7 @@ struct OscillatorSection
     void trackPhase(Waveform targetWaveform);
     void setName(std::string newOscName);
     void displayInitState();
+    void automatePan(float pan);
 
     Waveform sine;
 };
@@ -507,6 +587,15 @@ void OscillatorSection::Waveform::fillEntireWaveTable(char transformationTypeInd
     std::cout << "Wavetable filled with transformation algorithm No: " << transformationTypeIndex << std::endl;
 }
 
+void OscillatorSection::Waveform::shiftPhase(int phase)
+{
+    while (initialPhase - phase > 0)
+        {
+            initialPhase -= phase;
+            std::cout << "Phase shifted for " << phase << " degrees\n";
+        }
+}
+
 std::string OscillatorSection::getWaveformName(Waveform requestedWaveform)
 {
     return requestedWaveform.waveformName;
@@ -530,6 +619,15 @@ void OscillatorSection::setName(std::string newOscName)
     std::string tempOscName = oscName;
     oscName = newOscName;
     std::cout << "Previous oscillator name " << tempOscName << " has been changed to " << oscName << std::endl;
+}
+
+void OscillatorSection::automatePan(float targetPan)
+{
+    while (pan < targetPan)
+        {
+            pan += 0.1f;
+            std::cout << "Pan is " << pan << std::endl;
+        }
 }
 
 void OscillatorSection::displayInitState()
@@ -562,6 +660,7 @@ struct FilterSection
     std::string getFilteringAlgorithm(bool considerMixAmount = false); // returns algorithm of filtering
     void setParametricQuality(float coefficientOfQualityAndGainInteraction);
     void flipHorizontally(float pivotFrequencyOffset);
+    void automateCut(float cutFreq);
     void displayInitState();
 };
 // ================================================================================
@@ -602,6 +701,18 @@ void FilterSection::displayInitState()
               << "Comb pattern index = " << combPatternIndex << std::endl;
 }
 
+void FilterSection::automateCut(float cutFreq)
+{
+    if (cutFreq < cutFrequency)
+    {
+        while (cutFrequency > cutFreq)
+            {
+                cutFrequency -= 100.0f;
+                std::cout << "Decreasing cut frequency to " << cutFrequency << std::endl;
+            }
+    }
+}
+
 struct FXSection
 {
     FXSection();
@@ -616,6 +727,7 @@ struct FXSection
     void applyLowCutPreFiltering(float lowCutFrequency, float resonance);
     float returnRT60Time(float decayTime, float reverbSize); // returns time when reverb decays and fades out for 60 dB
     void setMixKnobExponential(float additionalExponentialCoefficient = 1.0f);
+    void iterateCompRatio(float ratio);
     void displayInitState();
 };
 // ================================================================================
@@ -658,6 +770,20 @@ void FXSection::displayInitState()
               << "Mix = " << mix << std::endl;
 }
 
+void FXSection::iterateCompRatio(float ratio)
+{
+    if (ratio < compressionRatio)
+    {
+        std::cout << "initial ratio is " << ratio << std::endl;
+        float difference = (compressionRatio - ratio) * 2;
+        for (int i = 0; i < static_cast<int>(difference); ++i)
+            {
+                ratio += 0.25f;
+                std::cout << "current ratio is " << ratio << std::endl;
+            }
+    }
+}
+
 struct LFOSection
 {
     LFOSection();
@@ -671,6 +797,7 @@ struct LFOSection
     void flipVertically(bool considerAutomationBipolarity = false);
     bool isConcavityGrouped(bool considerOnlySelectedSegments = false); // returns true if concavity is being edited for all segments simultaneously
     void toggleGridSnapping(bool applyOnlyForEnabledState = false, bool applyOnlyForDisabledState = false);
+    void shrinkPan(int stereoSpreader);
     void displayInitState();
 };
 // ================================================================================
@@ -743,6 +870,15 @@ void LFOSection::displayInitState()
               << "Trigger mode index = " << triggerModeIndex << std::endl;
 }
 
+void LFOSection::shrinkPan(int stereo)
+{
+    while (stereoSpreader > stereo)
+        {
+            stereoSpreader -= 5;
+            std::cout << "Stereo shrinked to " << stereoSpreader << std::endl;
+        }
+}
+
 struct SynthApplication
 {
     SynthApplication();
@@ -758,6 +894,7 @@ struct SynthApplication
     void modulateOneOscillatorWithAnother(OscillatorSection modulatingOscillator,
                                           OscillatorSection targetOscillator,
                                           float modulationDepth);
+    void automateFilterQuality(FilterSection filterToAutomate);
     void displayInitState();
 };
 // ================================================================================
@@ -791,6 +928,15 @@ void SynthApplication::modulateOneOscillatorWithAnother(OscillatorSection modula
                   << " has more than 1 voice, what may cause high CPU usage\n";
 }
 
+void SynthApplication::automateFilterQuality(FilterSection filterToAutomate)
+{
+    filterToAutomate.qualityFactor = 5.0f;
+    while (filter.qualityFactor < filterToAutomate.qualityFactor)
+        {
+            filter.qualityFactor += 0.5f;
+            std::cout << "Quality factor is " << filter.qualityFactor << std::endl;
+        }
+}
 //============================================================
 int main()
 { 
@@ -875,6 +1021,32 @@ int main()
     testSynth.applyFiltration(0.4f, negativeComb);
     testSynth.modulateOneOscillatorWithAnother(sawOsc, trisineOsc, 0.32f);
     testSynth.toggleFXElement(multiFX);
+    std::cout << "\n";
+
+    std::cout << "\n==================== NEW FUNCTIONS ====================\n\n";
+    myPhone.recalculateMemory(32);
+    std::cout << "\n";
+    bosch.decreaseHumidity(12, 5);
+    std::cout << "\n";
+    sennheiserHDxxx.buildImpedanceScale(100);
+    std::cout << "\n";
+    neumannRandomMike.increaseInput(0.05f);
+    std::cout << "\n";
+    LG.trackRPM(25.f);
+    std::cout << "\n";
+    trisineOsc.automatePan(0.99f);
+    std::cout << "\n";
+    square.shiftPhase(45);
+    std::cout << "\n";
+    env1.automateRelease(2.5f);
+    std::cout << "\n";
+    negativeComb.automateCut(5700.0f);
+    std::cout << "\n";
+    multiFX.iterateCompRatio(2.5f);
+    std::cout << "\n";
+    basicTriangle.shrinkPan(50);
+    std::cout << "\n";
+    testSynth.automateFilterQuality(negativeComb);
     std::cout << "\n";
     
     std::cout << "good to go!" << std::endl; 
