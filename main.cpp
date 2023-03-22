@@ -776,7 +776,7 @@ void FXSection::iterateCompRatio(float ratio)
     {
         std::cout << "initial ratio is " << ratio << std::endl;
         float difference = (compressionRatio - ratio) * 2;
-        for (int i = 0; i < (int) difference; ++i)
+        for (float i = 0.0f; i <  difference; i += 1.0f)
         {
             ratio += 0.25f;
             std::cout << "current ratio is " << ratio << std::endl;
